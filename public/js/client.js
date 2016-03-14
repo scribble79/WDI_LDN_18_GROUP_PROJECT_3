@@ -28,7 +28,6 @@ function submitForm(){
   var url = "http://localhost:3000/api" + $(this).attr('action'); //post to this url and do this action
   var data = $(this).serialize(); // we don't use json because we have put url encoded in our app.js // the data sort like name=Mike&email=mike.hayden@ga.co
 
-  form.reset(); // to clear the form
   ajaxRequest(method, url, data, authenticationSuccessful);
   }
 
@@ -63,10 +62,9 @@ function ajaxRequest(method, url, data, callback) {
         }
       })
       .done(callback)
-      .fail(function(err) {
-      console.error(err);
-    });
-}
+      .fail(displayErrors);
+  }
+
 
 function logout(){
   // remove the token
@@ -78,3 +76,8 @@ function removeToken() {
     return localStorage.removeItem('token');
 }
 
+function displayErrors(data){
+  // display the errors from the AJAX request on the page, inside the alert
+  // <div class="hide alert alert-danger" role="alert"></div>
+    $('.alert').html('<p>' + data.responseJSON.message + '</p>');
+}
