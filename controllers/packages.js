@@ -20,5 +20,5 @@ function packagesCreate(req, res){
 
 module.exports = {
   packagesIndex:  packagesIndex,
-  packagesCreate: packagesCreate,
+  packagesCreate: packagesCreate
 }
