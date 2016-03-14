@@ -9,6 +9,7 @@ $(function(){
 // GLOBAL VARIABLES
 
 var map;
+var currentInfoWindow;
 
 function createMap(){
   // Make a new map
@@ -35,9 +36,23 @@ function createMarkers(packages){
       animation: google.maps.Animation.DROP
     });
 
-  });
+    var infoWindow = new google.maps.InfoWindow({
+      position: position,
+      content: package.contents[0],
+
+    });
+
+      marker.addListener('click', function() {
+      // console.log('Clicked marker');
+        if(currentInfoWindow) currentInfoWindow.close();
+          currentInfoWindow = infoWindow;
+          infoWindow.open(map, marker);
+        });
+    });
   
 }
+
+
 
 ////// AUTHENTICATIONS REQUEST ////////
 
