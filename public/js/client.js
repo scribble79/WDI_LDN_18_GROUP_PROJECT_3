@@ -64,7 +64,9 @@ function ajaxRequest(method, url, data, callback) {
         }
       })
       .done(callback)
-      .fail(displayErrors);
+      .fail(function(){
+        console.error(err);
+      });
   }
 
 
