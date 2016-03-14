@@ -23,11 +23,17 @@ router.route('/packages')
   .get(packageController.index)
   .post(packageController.create);
 
+router.route('/packages/:id')
+  .get(packageController.show)
+  .put(packageController.update)
+  .delete(packageController.delete);
+
 router.route('/register')
   .post(authenticationController.register);
 
 router.route('/login')
   .post(authenticationController.login);
+
   
 // router.post('/login', authenticationController.login);
 // router.post('/register', authenticationController.register);

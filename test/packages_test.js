@@ -64,3 +64,39 @@ describe('POST /packages', function(){
         });
       });
     });
+
+
+describe('GET /packages/:id', function(){
+  it('should return a 401 repsonse', function(done){
+    api.get('/api/packages/' + packageId)
+    .set('Accept', 'application/json')
+    .expect(200, done);
+  });
+});
+
+
+describe('PUT /packages/:id', function(){
+  it('should return a new package with an updated package object', function(done){
+    api.put('/api/packages/' + packageId)
+        .set('Accept', 'application/json')
+        .send({
+              package: 
+                  {
+                  contents: ['Foie gras', 'chocolate']
+                  }
+                })
+        .end(function(err, res){
+          expect(res.body.package.contents).to.eql(['Foie gras', 'chocolate']);
+          // expect(res.body.package.contents).to.be.an('array');
+          done();
+        });
+      });
+    });
+
+describe('DELETE /packages/:id', function(){
+  it('should return a 204 response', function(done){
+    api.delete('/api/packages/' + packageId)
+      .set('Accept', 'application/json')
+      .expect(204, done);
+  });
+});
