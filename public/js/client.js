@@ -2,7 +2,15 @@ $(function(){
   console.log("Jake Weary at your service");
   $('form').on('submit', submitForm);
   createMap();
+  checkLoginState();
+
+  ajaxRequest("get", "http://localhost:3000/api/packages", null, createMarkers);
 });
+
+// GLOBAL VARIABLES
+
+var map;
+var currentInfoWindow;
 
 function createMap(){
   // Make a new map
@@ -14,7 +22,47 @@ function createMap(){
   });
 }
 
+
+function createMarkers(packages){
+  console.log("DATA FROM GET MARKERS AJAX REQUEST: " + packages);
+  console.log(packages[0].lng);
+
+  packages.forEach(function(package){
+    var position = { lat: package.lat, lng: package.lng }
+
+    // console.log("MARKER POSITION: " + position.lat + " " + position.lng);
+
+    var marker = new google.maps.Marker({
+      position: position,
+      map: map,
+      animation: google.maps.Animation.DROP
+    });
+
+    var infoWindow = new google.maps.InfoWindow({
+      position: position,
+      content: package.contents[0],
+
+    });
+
+      marker.addListener('click', function() {
+      // console.log('Clicked marker');
+        if(currentInfoWindow) currentInfoWindow.close();
+          currentInfoWindow = infoWindow;
+          infoWindow.open(map, marker);
+        });
+    });
+  
+}
+
 ////// AUTHENTICATIONS REQUEST ////////
+
+function checkLoginState(){
+  if(getToken()){
+    loggedInState();
+  } else{
+    loggedOutState();
+  }
+}
 
 function submitForm(){
   // get the data from the forms and make an ajaxRequest
@@ -32,12 +80,23 @@ function submitForm(){
   ajaxRequest(method, url, data, authenticationSuccessful);
   }
 
+function loggedInState(){
+  $('.loginContainer').hide();
+  $('.formContainer').show();
+  // getUsers();
+}
+
+function loggedOutState(){
+  $('.loginContainer').show();
+  $('.formContainer').hide();
+}
 
 function authenticationSuccessful(data) {
     // set the token and call checkLoginState
     if(data.token) setToken(data.token);
 
   }
+
 
 function setToken(token) {
     // set the token into localStorage
@@ -68,16 +127,6 @@ function ajaxRequest(method, url, data, callback) {
       });
   }
 
-function loggedInState(){
-  $('.loginContainer').hide();
-  $('.formContainer').show();
-  getUsers();
-}
-
-function loggedOutState(){
-  $('.loginContainer').show();
-  $('.formContainer').hide();
-}
 
 function logout(){
   // remove the token

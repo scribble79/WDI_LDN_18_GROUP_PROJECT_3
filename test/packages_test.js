@@ -46,3 +46,21 @@ describe('GET /packages', function(){
       });
   });
 });
+
+describe('POST /packages', function(){
+  it('should add a new package and return the package object', function(done){
+    api.post('/api/packages')
+        .set('Accept', 'application/json')
+        .send({
+              package: 
+                  {
+                  contents: ['Dark Chocolate Bounty', 'Biscuits']
+                  }
+                })
+        .end(function(err, res){
+          expect(res.body.package.contents).to.eql(['Dark Chocolate Bounty', 'Biscuits']);
+          // expect(res.body.package.contents).to.be.an('array');
+          done();
+        });
+      });
+    });

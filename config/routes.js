@@ -20,7 +20,8 @@ function secureRoute(req, res, next) {
 
 // ROUTES FOR SERVING DATA FOR THE API
 router.route('/packages')
-  .get(packageController.index);
+  .get(packageController.index)
+  .post(packageController.create);
 
 router.route('/register')
   .post(authenticationController.register);
