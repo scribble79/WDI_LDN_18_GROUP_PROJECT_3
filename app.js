@@ -8,6 +8,10 @@ var expressLayouts = require('express-ejs-layouts');
 var port          = process.env.PORT || 8000;
 var router        = require('./config/routes');
 
+// Set default view engine and views directory
+app.set("view engine", "ejs");
+app.set("views", __dirname + "/views");
+
 
 // Setup database
 var databaseURL    = 'mongodb://localhost/excess';

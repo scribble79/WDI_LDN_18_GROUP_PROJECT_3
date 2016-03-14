@@ -7,7 +7,6 @@ function packagesIndex(req, res){
   });
 }
 
-
 function packagesCreate(req, res){
   Package.create(req.body.package, function(err, package){
     //User.findByIdAndUpdate(req.user._id, { $push: { packages: package._id } }, function(err, user) {
@@ -15,8 +14,6 @@ function packagesCreate(req, res){
     return res.status(200).json({ package: package });
   });
 }
-
-
 
 module.exports = {
   packagesIndex:  packagesIndex,
