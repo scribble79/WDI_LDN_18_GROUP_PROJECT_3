@@ -1,8 +1,10 @@
 var router = require('express').Router();
 var jwt = require('jsonwebtoken');
-var secret = require('./tokens').secret;
-var usersController = require('../controllers/users');
-var authenticationController = require('../controllers/authentication');
+
+// var secret = require('/tokens').secret;
+
+var usersController = require('../controllers/packages');
+var authenticationController = require('../controllers/authentications');
 
 function secureRoute(req, res, next) {
   if(!req.headers.authorization) return res.status(401).json({ message: "Unauthorized" });
@@ -15,16 +17,6 @@ function secureRoute(req, res, next) {
     next();
   });
 }
-
-router.get('/users', secureRoute, usersController.index);
-  // .get(usersController.index);
-
-
-router.route('/users/:id')
-  .get(secureRoute, usersController.show)
-  .put(secureRoute, usersController.update)
-  .delete(secureRoute, usersController.delete);
-
 
 router.post('/login', authenticationController.login);
 router.post('/register', authenticationController.register);

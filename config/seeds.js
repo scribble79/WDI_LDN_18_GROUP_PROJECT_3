@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var User = require('../models/user');
 
-mongoose.connect('mongodb://localhost/bcrypt-jwt');
+mongoose.connect('mongodb://localhost/excess');
 
 User.create([{
   username: "Lise",
