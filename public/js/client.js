@@ -14,7 +14,6 @@ function createMap(){
   });
 }
 
-
 ////// AUTHENTICATIONS REQUEST ////////
 
 function submitForm(){
@@ -69,6 +68,16 @@ function ajaxRequest(method, url, data, callback) {
       });
   }
 
+function loggedInState(){
+  $('.loginContainer').hide();
+  $('.formContainer').show();
+  getUsers();
+}
+
+function loggedOutState(){
+  $('.loginContainer').show();
+  $('.formContainer').hide();
+}
 
 function logout(){
   // remove the token
