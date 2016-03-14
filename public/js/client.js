@@ -2,7 +2,13 @@ $(function(){
   console.log("Jake Weary at your service");
   $('form').on('submit', submitForm);
   createMap();
+
+  ajaxRequest("get", "http://localhost:3000/api/packages", null, createMarkers);
 });
+
+// GLOBAL VARIABLES
+
+var map;
 
 function createMap(){
   // Make a new map
@@ -14,6 +20,24 @@ function createMap(){
   });
 }
 
+function createMarkers(packages){
+  console.log("DATA FROM GET MARKERS AJAX REQUEST: " + packages);
+  console.log(packages[0].lng);
+
+  packages.forEach(function(package){
+    var position = { lat: package.lat, lng: package.lng }
+
+    // console.log("MARKER POSITION: " + position.lat + " " + position.lng);
+
+    var marker = new google.maps.Marker({
+      position: position,
+      map: map,
+      animation: google.maps.Animation.DROP
+    });
+
+  });
+  
+}
 
 ////// AUTHENTICATIONS REQUEST ////////
 
