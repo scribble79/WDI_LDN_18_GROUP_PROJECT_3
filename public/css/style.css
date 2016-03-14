@@ -22,13 +22,16 @@ html, body {
 
 .loginContainer {
   position: absolute;
-  z-index: 100;
-  border-radius: 10px;
-  display: inline-block;
-  margin-top: 35vh;
+  top: 0;
+  left: 1vw;
+  z-index: 1;
+  /*margin-top: 37vh;*/
   margin-left: 37vw;
-  width: 350px;
-  height: 200px;
+  width: 300px;
+  /*height: 200px;*/
+  background: white;
+  border-radius: 10px;
+  text-align: center;
   border: 1px solid blue;
 }
 
