@@ -77,12 +77,11 @@ function removeToken() {
     // remove the token from localStorage
     return localStorage.removeItem('token');
 }
-<<<<<<< HEAD
+
 
 function displayErrors(data){
   // display the errors from the AJAX request on the page, inside the alert
   // <div class="hide alert alert-danger" role="alert"></div>
     $('.alert').html('<p>' + data.responseJSON.message + '</p>');
 }
-=======
->>>>>>> dev
+
