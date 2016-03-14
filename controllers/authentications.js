@@ -19,12 +19,18 @@ function register(req, res) {
 }
 
 function login(req, res) {
- User.findOne({ email: req.body.user.email }, function(err, user) {
-   if(err) return res.send(500).json({ message: err });
-   if(!user || !user.validatePassword(req.body.user.password)) return res.status(401).json({ message: "Unauthorized" });
 
-   var token = jwt.sign(user, secret, "24h");
-   return res.status(200).json({ message: "Login successful", user: user, token: token });
+  console.log("SUBMITTED LOGIN FORM DATA: " + req.body.user);
+
+  User.findOne({ username: req.body.user.username }, function(err, user) {
+
+  console.log("SUBMITTED LOGIN PASSWORD: " + req.body.user.password);
+
+  if(err) return res.send(500).json({ message: err });
+  if(!user || !user.validatePassword(req.body.user.password)) return res.status(401).json({ message: "Unauthorized" });
+
+  var token = jwt.sign(user, secret, "24h");
+  return res.status(200).json({ message: "Login successful", user: user, token: token });
  });
 }
 

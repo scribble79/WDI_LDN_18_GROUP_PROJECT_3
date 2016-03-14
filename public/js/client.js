@@ -59,15 +59,16 @@ function createMarkers(packages){
 function submitForm(){
   // get the data from the forms and make an ajaxRequest
   // call authenticationSuccessful
-  event.preventDefault(); // not to reload the page with the form 
+  event.preventDefault(); // not to reload the page with the form
 
   var form = this; // to clear the form
+
+  console.log(form);
 
   var method = $(this).attr('method'); // attribute to the form the right methode
   var url = "http://localhost:3000/api" + $(this).attr('action'); //post to this url and do this action
   var data = $(this).serialize(); // we don't use json because we have put url encoded in our app.js // the data sort like name=Mike&email=mike.hayden@ga.co
 
-  form.reset(); // to clear the form
   ajaxRequest(method, url, data, authenticationSuccessful);
   }
 
@@ -102,10 +103,11 @@ function ajaxRequest(method, url, data, callback) {
         }
       })
       .done(callback)
-      .fail(function(err) {
-      console.error(err);
-    });
-}
+      .fail(function(){
+        console.error(err);
+      });
+  }
+
 
 function logout(){
   // remove the token
@@ -116,4 +118,3 @@ function removeToken() {
     // remove the token from localStorage
     return localStorage.removeItem('token');
 }
-
