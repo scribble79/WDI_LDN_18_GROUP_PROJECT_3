@@ -22,7 +22,13 @@ function secureRoute(req, res, next) {
 router.route('/packages')
   .get(packageController.index);
 
-router.post('/login', authenticationController.login);
-router.post('/register', authenticationController.register);
+router.route('/register')
+  .post(authenticationController.register);
+
+router.route('/login')
+  .post(authenticationController.login);
+  
+// router.post('/login', authenticationController.login);
+// router.post('/register', authenticationController.register);
 
 module.exports = router;
