@@ -1,0 +1,22 @@
+{
+  "name": "excess",
+  "description": "WDI-18-LDN-GROUP-PROJECT",
+  "main": "app.js",
+  "authors": [
+    "maxhilliard <mx.hilliard@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/scribble79/WDI_LDN_18_GROUP_PROJECT_3",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bluebird": "^3.3.4"
+  }
+}

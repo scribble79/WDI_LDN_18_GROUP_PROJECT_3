@@ -17,13 +17,14 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^0.8.5",
+    "bluebird": "^3.3.4",
     "body-parser": "^1.15.0",
+    "ejs": "^2.4.1",
     "express": "^4.13.4",
+    "express-ejs-layouts": "^2.0.0",
     "jsonwebtoken": "^5.7.0",
     "mongoose": "4.1.1",
-    "morgan": "^1.7.0",
-    "ejs": "^2.4.1",
-    "express-ejs-layouts": "^2.0.0"
+    "morgan": "^1.7.0"
   },
   "bugs": {
     "url": "https://github.com/scribble79/WDI_LDN_18_GROUP_PROJECT_3/issues"
