@@ -30,7 +30,7 @@ app.use('/api', router);
 
 // SET STATIC VIEW ON ROOT
 app.get('/', function(req, res){
-  res.render('static/home');
+  res.render('index');
 });
 
 // Listen on the correct PORT
