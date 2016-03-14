@@ -17,5 +17,10 @@ function packagesCreate(req, res){
 
 module.exports = {
   packagesIndex:  packagesIndex,
+<<<<<<< HEAD
   packagesCreate: packagesCreate,
 }
+=======
+  packagesCreate: packagesCreate
+}
+>>>>>>> dev

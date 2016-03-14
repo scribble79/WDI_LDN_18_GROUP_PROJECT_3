@@ -12,7 +12,6 @@ var router        = require('./config/routes');
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
 
-
 // Setup database
 var databaseURL    = 'mongodb://localhost/excess';
 
