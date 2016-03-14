@@ -25,10 +25,10 @@ html, body {
   top: 0;
   left: 1vw;
   z-index: 1;
-  margin-top: 37vh;
+  /*margin-top: 37vh;*/
   margin-left: 37vw;
   width: 300px;
-  height: 200px;
+  /*height: 200px;*/
   background: white;
   border-radius: 10px;
   text-align: center;
