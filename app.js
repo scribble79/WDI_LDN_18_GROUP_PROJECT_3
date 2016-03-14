@@ -5,8 +5,8 @@ var morgan         = require('morgan');
 var mongoose       = require('mongoose');
 var app            = express();
 var expressLayouts = require('express-ejs-layouts');
-var port          = process.env.PORT || 8000;
-var router        = require('./config/routes');
+var port           = process.env.PORT || 8000;
+var router         = require('./config/routes');
 
 // Set default view engine and views directory
 app.set("view engine", "ejs");
@@ -26,7 +26,12 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(routes);
+app.use('/api', router);
+
+// SET STATIC VIEW ON ROOT
+app.get('/', function(req, res){
+  res.render('static/home');
+});
 
 // Listen on the correct PORT
 app.listen(process.env.PORT || 3000);
