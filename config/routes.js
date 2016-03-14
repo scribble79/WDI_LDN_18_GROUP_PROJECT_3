@@ -3,7 +3,7 @@ var jwt = require('jsonwebtoken');
 
 // var secret = require('/tokens').secret;
 
-var usersController = require('../controllers/packages');
+var packageController = require('../controllers/packages');
 var authenticationController = require('../controllers/authentications');
 
 function secureRoute(req, res, next) {
@@ -17,6 +17,10 @@ function secureRoute(req, res, next) {
     next();
   });
 }
+
+// ROUTES FOR SERVING DATA FOR THE API
+router.route('/packages')
+  .get(packageController.index);
 
 router.post('/login', authenticationController.login);
 router.post('/register', authenticationController.register);
