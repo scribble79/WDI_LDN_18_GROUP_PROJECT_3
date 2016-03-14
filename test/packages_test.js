@@ -1,0 +1,48 @@
+var chai = require('chai');
+var should = chai.should();
+var expect = chai.expect;
+var supertest = require('supertest');
+var api = supertest('http://localhost:3000');
+var mongoose = require('mongoose');
+
+
+
+var Package = require('../models/Package');
+
+var packageId;
+
+beforeEach(function(done){
+  mongoose.connect('mongodb://localhost/excess', function(){
+    mongoose.connection.db.dropDatabase(function(){
+      Package.create({contents: ['Testing']}, function(err,package){
+        packageId = package._id.toString();
+        done(err);
+      });
+    });
+  });
+});
+
+
+describe('GET /packages', function(){
+  it('should return a 200 response', function(done){
+    api.get('/api/packages')
+      .set('Accept', 'application/json')
+      .expect(200,done);
+  });
+  it('should return an array', function(done){
+    api.get('/api/packages')
+      .set('Accept', 'application/json')
+      .end(function(err, res){
+        expect(res.body).to.be.an('array');
+        done();
+      });
+  });
+  it('should return an array of objects that have a content property', function(done){
+    api.get('/api/packages')
+      .set('Accept', 'application/json')
+      .end(function(err,res){
+        expect(res.body[0]).to.have.property('contents');
+        done();
+      });
+  });
+});

@@ -26,6 +26,10 @@
     "mongoose": "4.1.1",
     "morgan": "^1.7.0"
   },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "supertest": "^1.2.0"
+  },
   "bugs": {
     "url": "https://github.com/scribble79/WDI_LDN_18_GROUP_PROJECT_3/issues"
   },
