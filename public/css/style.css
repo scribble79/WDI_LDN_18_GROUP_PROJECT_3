@@ -1,3 +1,42 @@
 body {
-  background: red;
+  position: relative;
+}
+
+.formContainer {
+  position: absolute;
+  top: 0;
+  left: 1vw;
+  z-index: 1;
+  margin-top: 15vh;
+  width: 300px;
+  height: 70vh;
+  background: white;
+  border-radius: 10px;
+  text-align: center;
+  border: 1px solid red;
+}
+
+.loginContainer {
+  border-radius: 10px;
+  display: inline-block;
+  margin-top: 35vh;
+  margin-left: 37vw;
+  width: 350px;
+  height: 200px;
+  border: 1px solid blue;
+}
+
+form {
+  margin: 10px;
+}
+
+input {
+  width: 100%;
+  margin: 0;
+  /*padding: 10px !important;*/
+}
+
+button {
+  width: 100%;
+  margin: 0;
 }
