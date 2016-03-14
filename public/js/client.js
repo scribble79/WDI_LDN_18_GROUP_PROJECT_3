@@ -20,9 +20,11 @@ function createMap(){
 function submitForm(){
   // get the data from the forms and make an ajaxRequest
   // call authenticationSuccessful
-  event.preventDefault(); // not to reload the page with the form 
+  event.preventDefault(); // not to reload the page with the form
 
   var form = this; // to clear the form
+
+  console.log(form);
 
   var method = $(this).attr('method'); // attribute to the form the right methode
   var url = "http://localhost:3000/api" + $(this).attr('action'); //post to this url and do this action
@@ -75,9 +77,12 @@ function removeToken() {
     // remove the token from localStorage
     return localStorage.removeItem('token');
 }
+<<<<<<< HEAD
 
 function displayErrors(data){
   // display the errors from the AJAX request on the page, inside the alert
   // <div class="hide alert alert-danger" role="alert"></div>
     $('.alert').html('<p>' + data.responseJSON.message + '</p>');
 }
+=======
+>>>>>>> dev
