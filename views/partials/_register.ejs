@@ -1,1 +1,29 @@
-section register user
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Register User</title>
+</head>
+<body>
+<form method="post" action="/register">
+
+    <label for="user[username]">Username</label>
+    <input type="text" name="user[username]">
+  
+    <label for="user[email]">Email</label>
+    <input type="email" name="user[email]">
+
+    <label for="user[avatar]">Avatar</label>
+    <input type="text" name="user[avatar]">
+
+    <label for="user[password]">Password</label>
+    <input type="password" name="user[password]">
+
+    <label for="user[passwordConfirmation]">Password Confirmation</label>
+    <input type="password" name="user[passwordConfirmation]">
+
+    <button type="submit">Submit</button>
+
+</form>
+ 
+</body>
+</html>
