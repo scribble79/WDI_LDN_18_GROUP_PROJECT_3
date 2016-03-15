@@ -35,7 +35,10 @@ router.route('/login')
   .post(authenticationController.login);
 
 router.route('/addLocation')
-  .post(authenticationController.addLocation);
+  .patch(authenticationController.addLocation);
+
+router.route('/users')
+  .get(authenticationController.usersIndex);
 
 
 // router.post('/login', authenticationController.login);

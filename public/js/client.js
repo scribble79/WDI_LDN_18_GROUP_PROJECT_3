@@ -80,7 +80,7 @@ function submitLoginRegisterForm(){
 
   var form = this; // to clear the form
 
-  console.log(form);
+  // console.log(form);
 
   var method = $(this).attr('method'); // attribute to the form the right method
   var url = "http://localhost:3000/api" + $(this).attr('action'); //post to this url and do this action
@@ -93,7 +93,7 @@ function submitLocationForm(){
 
     event.preventDefault();
 
-    console.log("Location form submitted");
+    // console.log("Location form submitted");
 
     var form = this;
 
@@ -101,7 +101,8 @@ function submitLocationForm(){
     var url = "http://localhost:3000/api" + $(this).attr('action');
 
     var postcode = $('.userPostcode').val()
-    console.log("Location form data: " + postcode);
+
+    // console.log("Location form data: " + postcode);
 
     var user = currentUser();
 
@@ -110,21 +111,23 @@ function submitLocationForm(){
 
     geocoder.geocode({ 'address': postcode }, function(results, status){
       if(status === google.maps.GeocoderStatus.OK) {
-        var coordinates = results[0].geometry.location;
-        console.log("Location coordinates: " + coordinates);
 
-        // var location = {
-        //   lng: coordinates.lng,
-        //   lat: coordinates.lat
-        // }
+        var lat = results[0].geometry.location.lat();
+        var lng = results[0].geometry.location.lng();
+        console.log(lat,lng);
+        // console.log("Geometry keys: " + Object.keys(results[0].geometry.location));
 
-        // var data = {
-        //   lng: coordinates.lng,
-        //   lat: coordinates.lat
-        // }
+        // console.log("Location coordinates: " + coordinates);
+        // console.log("TYPE OF COORDINATES DATA " + $.type(coordinates));
+        // console.log("Location coordinates: " + results[0].geometry.location.lng);
+        var location = {
+          userId: user._id,
+          lng: lng,
+          lat: lat
+        }
 
         // Make request to API to add location to user
-        // ajaxRequest(method, url, null, authenticationSuccessful);
+        ajaxRequest("patch", url, location, authenticationSuccessful);
       }
     });
   }
