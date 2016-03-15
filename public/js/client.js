@@ -8,14 +8,27 @@ $(function(){
   $('.package-link').on('click', showCreatePackage);
   $('.createPackageForm').on('submit', submitPackageForm);
 
+  // Add event listener to links
+  $(".linkToRegister").click(function(){
+    $('.loginForm').addClass('hidden');
+    $('.registerForm').removeClass('hidden');
+    $(this).addClass('hidden');
+    $('.linkToLogin').removeClass('hidden');
+  });
+
+  $(".linkToLogin").click(function(){
+    $('.loginForm').removeClass('hidden');
+    $('.registerForm').addClass('hidden');
+    $(this).addClass('hidden');
+    $('.linkToRegister').removeClass('hidden');
+  });
+
   // Create map
   createMap(51.5072, -0.1275, 10);
 
   // Check login state
   checkLoginState();
 
-  // // Make request for markers from DB
-  // ajaxRequest("get", "http://localhost:3000/api/packages", null, createMarkers);
 });
 
 // GLOBAL VARIABLES
@@ -130,12 +143,12 @@ function submitLocationForm(){
 
         // Create map, centered on location entered
         createMap(location.lat, location.lng, 15);
-        // Make request for markers from DB
-        ajaxRequest("get", "http://localhost:3000/api/packages", null, createMarkers);
-
 
         // Make request to API to add location to user
         ajaxRequest("patch", url, location, authenticationSuccessful);
+
+        // Show correct containers
+        checkLoginState();
       }
     });
   }
@@ -159,10 +172,10 @@ function submitPackageForm(){
 }
 
 function loggedInState(){
-  // $('.loginContainer').hide();
+  $('.loginContainer').hide();
   $('.formContainer').show();
-  $('.packageForm').hide();
-  // getUsers();
+  // Make request for markers from DB
+  ajaxRequest("get", "http://localhost:3000/api/packages", null, createMarkers);
 }
 
 function currentUser() {
@@ -186,7 +199,12 @@ function authenticationSuccessful(data) {
     if(data.token) setToken(data.token);
 
     // Show and hide the appropriate panels
-    checkLoginState();
+    // checkLoginState();
+    $('.loginForm').addClass('hidden');
+    $('.registerForm').addClass('hidden');
+    $('.userLocationForm').removeClass('hidden');
+    $('.linkToLogin').addClass('hidden');
+    $('.linkToRegister').addClass('hidden');
   }
 
 
