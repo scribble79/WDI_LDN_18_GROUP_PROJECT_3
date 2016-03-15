@@ -217,6 +217,7 @@ function submitPackageForm(){
 function loggedInState(){
   $('.loginContainer').hide();
   $('.formContainer').show();
+  $('.navbarButton').hide();
   // Make request for markers from DB
   ajaxRequest("get", "http://localhost:3000/api/packages", null, createMarkers);
 }
@@ -293,4 +294,5 @@ function removeToken() {
 function showCreatePackage() {
   $('.menuContainer').hide();
   $('.packageForm').show();
+  $('.navbarButton').show();
 }
