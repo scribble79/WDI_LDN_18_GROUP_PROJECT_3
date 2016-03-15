@@ -36,6 +36,22 @@ User.create([{
     contents: ['Potatoes', 'Roule'],
     lat: 51.5132,
     lng: 0.0777
+  },{
+    contents: ['Cheese', 'Ham'],
+    lat: 51.5081,
+    lng: -0.1281
+  },{
+    contents: ['Tinned Tomatoes'],
+    lat: 51.4839,
+    lng: -0.0664
+  },{
+    contents: ['Pizza'],
+    lat: 51.4999,
+    lng: -0.1621
+  },{
+    contents: ['Cereal', 'Eggs'],
+    lat: 51.5768,
+    lng: 0.1801
   }], function(err, packages){
     if(err) console.error(err);
     else console.log(packages);

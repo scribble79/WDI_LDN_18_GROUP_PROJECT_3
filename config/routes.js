@@ -46,7 +46,7 @@ router.route('/users/:id')
   .get(userController.show)
   .put(userController.update);
 
-// router.post('/login', authenticationController.login);
-// router.post('/register', authenticationController.register);
+router.post('/login', authenticationController.login);
+router.post('/register', authenticationController.register);
 
 module.exports = router;
