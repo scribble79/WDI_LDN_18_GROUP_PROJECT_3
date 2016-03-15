@@ -2,6 +2,10 @@ html, body {
   height: 100%; margin: 0; padding: 0;
 }
 
+.hidden {
+  display: none;
+}
+
 #map {
   height: 100%;
 }
@@ -60,4 +64,3 @@ button {
   width: 100%;
   margin: 0;
 }
-
