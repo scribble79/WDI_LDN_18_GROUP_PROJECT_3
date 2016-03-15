@@ -3,6 +3,7 @@ $(function(){
 
   // Add event listeners to forms
   $('.loginForm').on('submit', submitLoginRegisterForm);
+  $('.logoutbtn').on('click', logout);
   $('.registerForm').on('submit', submitLoginRegisterForm);
   $('.userLocationForm').on('submit', submitLocationForm);
   $('.package-link').on('click', showCreatePackage);
@@ -114,6 +115,16 @@ function checkLoginState(){
   }
 }
 
+function logout(){
+  removeToken();
+  loggedOutState();
+}
+
+function removeToken() {
+  // remove the token from localStorage
+  return localStorage.removeItem('token');
+}
+
 function submitLoginRegisterForm(){
   // get the data from the forms and make an ajaxRequest
   // call authenticationSuccessful
@@ -218,8 +229,10 @@ function submitPackageForm(){
 function loggedInState(){
   $('.loginContainer').hide();
   $('.formContainer').show();
+  $('.packageForm').hide();
   // Make request for markers from DB
   ajaxRequest("get", "http://localhost:3000/api/packages", null, createMarkers);
+  $('.logoutbtn').show();
 }
 
 function currentUser() {
@@ -235,7 +248,11 @@ function currentUser() {
 
 function loggedOutState(){
   $('.loginContainer').show();
+  $('.loginForm').removeClass('hidden');
+  $('.userLocationForm').addClass('hidden');
   $('.formContainer').hide();
+  $('.logoutbtn').hide();
+  $('.linkToRegister').removeClass('hidden');
 }
 
 function authenticationSuccessful(data) {
@@ -279,12 +296,6 @@ function ajaxRequest(method, url, data, callback) {
       .fail(function(){
       });
   }
-
-
-function logout(){
-  // remove the token
-  removeToken();
-}
 
 function removeToken() {
     // remove the token from localStorage
