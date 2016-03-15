@@ -196,7 +196,6 @@ function ajaxRequest(method, url, data, callback) {
       })
       .done(callback)
       .fail(function(){
-        console.error(err);
       });
   }
 
