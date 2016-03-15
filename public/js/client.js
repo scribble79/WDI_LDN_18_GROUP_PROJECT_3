@@ -5,7 +5,8 @@ $(function(){
   $('.loginForm').on('submit', submitLoginRegisterForm);
   $('.registerForm').on('submit', submitLoginRegisterForm);
   $('.userLocationForm').on('submit', submitLocationForm);
-  $('.package-link').on('click', createPackage);
+  $('.package-link').on('click', showCreatePackage);
+  $('.createPackageForm').on('submit', submitPackageForm);
 
   // Create map
   createMap(51.5072, -0.1275, 10);
@@ -139,6 +140,24 @@ function submitLocationForm(){
     });
   }
 
+function submitPackageForm(){
+  event.preventDefault();
+
+  var form = this;
+
+  var method = $(this).attr('method');
+  var url = "http://localhost:3000/api" + $(this).attr('action');
+  var package = {
+    contents: $('.packageContent').val(),
+    note: $('.packageNote').val(),
+    contact: $('.packageContact').val()
+  }
+
+  var data = {package: package}
+  ajaxRequest("post", "http://localhost:3000/api/packages", data)
+
+}
+
 function loggedInState(){
   // $('.loginContainer').hide();
   $('.formContainer').show();
@@ -211,7 +230,7 @@ function removeToken() {
     return localStorage.removeItem('token');
 }
 
-function createPackage() {
+function showCreatePackage() {
   $('.menuContainer').hide();
   $('.packageForm').show();
 }

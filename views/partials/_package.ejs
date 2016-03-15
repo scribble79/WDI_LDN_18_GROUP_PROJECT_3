@@ -1,16 +1,16 @@
 
 <div class="packageForm" >
-  <form>
-   <select multiple="multiple" name="webmenu" id="webmenu">
-       <option value="fruit and veg" data-image="icons/icon_calendar.gif" name="package[content]">Fruit and veg</option>
-       <option value="meat and fish" data-image="icons/icon_cart.gif" name="package[content]" >Meat and fish</option>
-       <option value="dairy and eggs" data-image="icons/icon_cd.gif" name="package[content]">Dairy and eggs</option>
-       <option value="baked goods" data-image="icons/icon_cd.gif" name="package[content]">Baked goods</option>
-      <option value="Staples" data-image="icons/icon_games.gif" name="package[content]">Staples</option>
+  <form class="createPackageForm" action="/addPackage" method="post">
+   <select multiple="multiple" name="webmenu" id="webmenu" class="packageContent">
+       <option value="fruit and veg" data-image="icons/icon_calendar.gif">Fruit and veg</option>
+       <option value="meat and fish" data-image="icons/icon_cart.gif">Meat and fish</option>
+       <option value="dairy and eggs" data-image="icons/icon_cd.gif">Dairy and eggs</option>
+       <option value="baked goods" data-image="icons/icon_cd.gif">Baked goods</option>
+      <option value="Staples" data-image="icons/icon_games.gif">Staples</option>
      </select>
 
-     <input type="textarea" name="package[note]" placeholder="Notes">
-     <input type="text" name="package[contact]" placeholder="Contact details">
+     <input type="textarea" name="package[note]" placeholder="Notes" class="packageNote">
+     <input type="text" name="package[contact]" placeholder="Contact details" class="packageContact">
      <button type="submit">Submit the new package</button>
   </form>
 </div>
