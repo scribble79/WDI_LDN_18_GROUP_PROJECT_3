@@ -11,6 +11,7 @@ var Package = require('../models/Package');
 
 var packageId;
 
+
 beforeEach(function(done){
   mongoose.connect('mongodb://localhost/excess', function(){
     mongoose.connection.db.dropDatabase(function(){
@@ -52,7 +53,7 @@ describe('POST /packages', function(){
     api.post('/api/packages')
         .set('Accept', 'application/json')
         .send({
-              package: 
+              package:
                   {
                   contents: ['Dark Chocolate Bounty', 'Biscuits']
                   }
@@ -80,7 +81,7 @@ describe('PUT /packages/:id', function(){
     api.put('/api/packages/' + packageId)
         .set('Accept', 'application/json')
         .send({
-              package: 
+              package:
                   {
                   contents: ['Foie gras', 'chocolate']
                   }
