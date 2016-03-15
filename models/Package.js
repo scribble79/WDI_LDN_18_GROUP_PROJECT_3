@@ -4,6 +4,8 @@ var packageSchema = mongoose.Schema({
   contents: [],
   lat: Number,
   lng: Number,
+  note: String,
+  contact: String 
 },{
   timestamps: true
 });

@@ -1,6 +1,7 @@
 $(function(){
   console.log("Jake Weary at your service");
   $('form').on('submit', submitForm);
+  $('.package-link').on('click', createPackage);
   createMap();
   checkLoginState();
 
@@ -83,6 +84,7 @@ function submitForm(){
 function loggedInState(){
   $('.loginContainer').hide();
   $('.formContainer').show();
+  $('.packageForm').hide();
   // getUsers();
 }
 
@@ -138,4 +140,9 @@ function logout(){
 function removeToken() {
     // remove the token from localStorage
     return localStorage.removeItem('token');
+}
+
+function createPackage() {
+  $('.menuContainer').hide();
+  $('.packageForm').show();
 }
