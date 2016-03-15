@@ -17,14 +17,20 @@
 
   <div id="map"></div>
 
-  <div class ="formContainer">
+
+  <div class="logoutContainer">
+  <%- include ./partials/_logout %>
+  </div>
+
+  <div class="formContainer">
 
       
     <%- include ./partials/_package %>
     <%- include ./partials/_navbar-side %>
-
+    <%- include ./partials/_edit-user %>
 
     <button class="navbarButton back">Back</button>
+
   </div>
 
   <div class="loginContainer">
@@ -34,6 +40,8 @@
     <%- include ./partials/_location %>
 
   </div>
+
+ 
 
 </body>
 </html>
