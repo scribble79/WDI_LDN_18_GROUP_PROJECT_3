@@ -12,8 +12,8 @@ $(function(){
   // Check login state
   checkLoginState();
 
-  // Make request for markers from DB
-  ajaxRequest("get", "http://localhost:3000/api/packages", null, createMarkers);
+  // // Make request for markers from DB
+  // ajaxRequest("get", "http://localhost:3000/api/packages", null, createMarkers);
 });
 
 // GLOBAL VARIABLES
@@ -128,6 +128,9 @@ function submitLocationForm(){
 
         // Create map, centered on location entered
         createMap(location.lat, location.lng);
+        // Make request for markers from DB
+        ajaxRequest("get", "http://localhost:3000/api/packages", null, createMarkers);
+
 
         // Make request to API to add location to user
         ajaxRequest("patch", url, location, authenticationSuccessful);
