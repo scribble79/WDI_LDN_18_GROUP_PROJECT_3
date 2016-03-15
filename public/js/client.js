@@ -23,6 +23,9 @@ $(function(){
     $('.linkToRegister').removeClass('hidden');
   });
 
+  // Test edit form population functionality
+  populateEditForm();
+
   // Create map
   createMap(51.5072, -0.1275, 10);
 
@@ -152,6 +155,20 @@ function submitLocationForm(){
       }
     });
   }
+
+function populateEditForm(){
+  event.preventDefault();
+
+  var method = 'GET';
+  var id = currentUser()._id;
+  var url = "http://localhost:3000/api/users/" + id;
+  ajaxRequest(method, url, null, function(data) {
+    var user = data.user;
+      $('.editUsername').val(user.username);
+      $('.editEmail').val(user.email);
+      $('.editAvatar').val(user.avatar);
+  });
+}
 
 function submitEditForm(){
   event.preventDefault();

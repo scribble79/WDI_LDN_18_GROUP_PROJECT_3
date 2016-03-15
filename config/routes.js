@@ -43,6 +43,7 @@ router.route('/users')
   .get(authenticationController.usersIndex);
 
 router.route('/users/:id')
+  .get(userController.show)
   .put(userController.update);
 
 // router.post('/login', authenticationController.login);
