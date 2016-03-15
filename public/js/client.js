@@ -6,6 +6,21 @@ $(function(){
   $('.registerForm').on('submit', submitLoginRegisterForm);
   $('.userLocationForm').on('submit', submitLocationForm);
 
+  // Add event listener to links
+  $(".linkToRegister").click(function(){
+    $('.loginForm').addClass('hidden');
+    $('.registerForm').removeClass('hidden');
+    $(this).addClass('hidden');
+    $('.linkToLogin').removeClass('hidden');
+  });
+
+  $(".linkToLogin").click(function(){
+    $('.loginForm').removeClass('hidden');
+    $('.registerForm').addClass('hidden');
+    $(this).addClass('hidden');
+    $('.linkToRegister').removeClass('hidden');
+  });
+
   // Create map
   createMap(51.5072, -0.1275, 10);
 
@@ -87,6 +102,12 @@ function submitLoginRegisterForm(){
   var data = $(this).serialize(); // we don't use json because we have put url encoded in our app.js // the data sort like name=Mike&email=mike.hayden@ga.co
 
   ajaxRequest(method, url, data, authenticationSuccessful);
+
+  // Hide login/register form and show location window
+  // $('.loginForm').addClass('hidden');
+  // $('.registerForm').addClass('hidden');
+  // $('.userLocationForm').removeClass('hidden');
+
 }
 
 function submitLocationForm(){
@@ -139,7 +160,7 @@ function submitLocationForm(){
   }
 
 function loggedInState(){
-  // $('.loginContainer').hide();
+  $('.loginContainer').hide();
   $('.formContainer').show();
   // getUsers();
 }
