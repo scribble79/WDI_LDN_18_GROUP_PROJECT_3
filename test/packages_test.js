@@ -53,10 +53,7 @@ describe('POST /packages', function(){
     api.post('/api/packages')
         .set('Accept', 'application/json')
         .send({
-              package:
-                  {
-                  contents: ['Dark Chocolate Bounty', 'Biscuits']
-                  }
+                contents: ['Dark Chocolate Bounty', 'Biscuits']
                 })
         .end(function(err, res){
           expect(res.body.contents).to.eql(['Dark Chocolate Bounty', 'Biscuits']);

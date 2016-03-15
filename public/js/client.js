@@ -48,7 +48,6 @@ function createMap(lat, lng, zoom){
 
 function createMarkers(packages){
   console.log("DATA FROM GET MARKERS AJAX REQUEST: " + packages);
-  console.log(packages[0].lng);
 
   packages.forEach(function(package){
     var position = { lat: package.lat, lng: package.lng }
