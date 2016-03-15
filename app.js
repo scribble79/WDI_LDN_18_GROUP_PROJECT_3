@@ -4,7 +4,7 @@ var bodyParser     = require('body-parser');
 var morgan         = require('morgan');
 var mongoose       = require('mongoose');
 var app            = express();
-var port           = process.env.PORT || 8000;
+var PORT           = process.env.PORT || 3000;
 var router         = require('./config/routes');
 
 // Set default view engine and views directory
@@ -13,7 +13,7 @@ app.set("views", __dirname + "/views");
 app.use(express.static(__dirname + '/public'));
 
 // Setup database
-var databaseURL    = 'mongodb://localhost/excess';
+var databaseURL    = process.env.MONGOLAB_URI || 'mongodb://localhost/excess';
 
 // Connect to database
 mongoose.connect(databaseURL);
@@ -34,5 +34,6 @@ app.get('/', function(req, res){
 });
 
 // Listen on the correct PORT
-app.listen(process.env.PORT || 3000);
-console.log("Express is alive and listening on port 3000");
+app.listen(PORT, function() {;
+  console.log("Express is alive and listening on port " + PORT);
+});
