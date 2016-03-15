@@ -156,12 +156,16 @@ function submitLocationForm(){
 function submitEditForm(){
   event.preventDefault();
 
-  var method = 'PUT'; // attribute to the form the right methode
-  var url = "http://localhost:3000/api" + $(this).attr('action'); //post to this url and do this action
+  var method = 'PUT';
+  var id = currentUser()._id; // attribute to the form the right methode
+  var url = "http://localhost:3000/api/users/" + id; //post to this url and do this action
   var data = $(this).serialize(); // we don't use json because we have put url encoded in our app.js // the data sort like name=Mike&email=mike.hayden@ga.co
-
-  ajaxRequest(method, url, data, authenticationSuccessful);
-    } 
+  console.log(id);
+  console.log(data);
+  ajaxRequest(method, url, data, function(user) {
+    console.log(user);
+  });
+} 
 
 
 function loggedInState(){
