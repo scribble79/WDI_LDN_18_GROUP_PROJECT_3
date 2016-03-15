@@ -59,7 +59,7 @@ describe('POST /packages', function(){
                   }
                 })
         .end(function(err, res){
-          expect(res.body.package.contents).to.eql(['Dark Chocolate Bounty', 'Biscuits']);
+          expect(res.body.contents).to.eql(['Dark Chocolate Bounty', 'Biscuits']);
           // expect(res.body.package.contents).to.be.an('array');
           done();
         });
