@@ -1,9 +1,18 @@
 $(function(){
   console.log("Jake Weary at your service");
-  $('form').on('submit', submitForm);
+
+  // Add event listeners to forms
+  $('.loginForm').on('submit', submitLoginRegisterForm);
+  $('.registerForm').on('submit', submitLoginRegisterForm);
+  $('.userLocationForm').on('submit', submitLocationForm);
+
+  // Create map
   createMap();
+
+  // Check login state
   checkLoginState();
 
+  // Make request for markers from DB
   ajaxRequest("get", "http://localhost:3000/api/packages", null, createMarkers);
 });
 
@@ -64,7 +73,7 @@ function checkLoginState(){
   }
 }
 
-function submitForm(){
+function submitLoginRegisterForm(){
   // get the data from the forms and make an ajaxRequest
   // call authenticationSuccessful
   event.preventDefault(); // not to reload the page with the form
@@ -73,18 +82,69 @@ function submitForm(){
 
   console.log(form);
 
-  var method = $(this).attr('method'); // attribute to the form the right methode
+  var method = $(this).attr('method'); // attribute to the form the right method
   var url = "http://localhost:3000/api" + $(this).attr('action'); //post to this url and do this action
   var data = $(this).serialize(); // we don't use json because we have put url encoded in our app.js // the data sort like name=Mike&email=mike.hayden@ga.co
 
   ajaxRequest(method, url, data, authenticationSuccessful);
+}
+
+function submitLocationForm(){
+
+    event.preventDefault();
+
+    console.log("Location form submitted");
+
+    var form = this;
+
+    var method = $(this).attr('method');
+    var url = "http://localhost:3000/api" + $(this).attr('action');
+
+    var postcode = $('.userPostcode').val()
+    console.log("Location form data: " + postcode);
+
+    var user = currentUser();
+
+    // Make geoCoder request
+    var geocoder = new google.maps.Geocoder();
+
+    geocoder.geocode({ 'address': postcode }, function(results, status){
+      if(status === google.maps.GeocoderStatus.OK) {
+        var coordinates = results[0].geometry.location;
+        console.log("Location coordinates: " + coordinates);
+
+        // var location = {
+        //   lng: coordinates.lng,
+        //   lat: coordinates.lat
+        // }
+
+        // var data = {
+        //   lng: coordinates.lng,
+        //   lat: coordinates.lat
+        // }
+
+        // Make request to API to add location to user
+        // ajaxRequest(method, url, null, authenticationSuccessful);
+      }
+    });
   }
 
 function loggedInState(){
-  $('.loginContainer').hide();
+  // $('.loginContainer').hide();
   $('.formContainer').show();
   // getUsers();
 }
+
+function currentUser() {
+  var token = getToken();
+  var payload = token.split('.')[1];
+  payload = window.atob(payload);
+  payload = JSON.parse(payload);
+  console.log("PAYLOAD: " + payload);
+  console.log("PAYLOAD USER ID: " + payload._id);
+  return payload;
+}
+
 
 function loggedOutState(){
   $('.loginContainer').show();

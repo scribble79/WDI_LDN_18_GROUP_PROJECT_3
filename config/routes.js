@@ -34,7 +34,10 @@ router.route('/register')
 router.route('/login')
   .post(authenticationController.login);
 
-  
+router.route('/addLocation')
+  .post(authenticationController.addLocation);
+
+
 // router.post('/login', authenticationController.login);
 // router.post('/register', authenticationController.register);
 
