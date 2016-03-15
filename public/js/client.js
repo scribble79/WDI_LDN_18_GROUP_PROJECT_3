@@ -28,8 +28,6 @@ $(function(){
   // Check login state
   checkLoginState();
 
-  // // Make request for markers from DB
-  // ajaxRequest("get", "http://localhost:3000/api/packages", null, createMarkers);
 });
 
 // GLOBAL VARIABLES
@@ -103,12 +101,6 @@ function submitLoginRegisterForm(){
   var data = $(this).serialize(); // we don't use json because we have put url encoded in our app.js // the data sort like name=Mike&email=mike.hayden@ga.co
 
   ajaxRequest(method, url, data, authenticationSuccessful);
-
-  // Hide login/register form and show location window
-  // $('.loginForm').addClass('hidden');
-  // $('.registerForm').addClass('hidden');
-  // $('.userLocationForm').removeClass('hidden');
-
 }
 
 function submitLocationForm(){
@@ -154,8 +146,8 @@ function submitLocationForm(){
         // Make request to API to add location to user
         ajaxRequest("patch", url, location, authenticationSuccessful);
 
-        // Show form container
-        $('.formContainer').show();
+        // Show correct containers
+        checkLoginState();
       }
     });
   }
@@ -188,7 +180,12 @@ function authenticationSuccessful(data) {
     if(data.token) setToken(data.token);
 
     // Show and hide the appropriate panels
-    checkLoginState();
+    // checkLoginState();
+    $('.loginForm').addClass('hidden');
+    $('.registerForm').addClass('hidden');
+    $('.userLocationForm').removeClass('hidden');
+    $('.linkToLogin').addClass('hidden');
+    $('.linkToRegister').addClass('hidden');
   }
 
 
