@@ -1,6 +1,7 @@
 $(function(){
   console.log("Jake Weary at your service");
   $('form').on('submit', submitForm);
+  $('#edit-user').on('click', submitEditForm);
   createMap();
   checkLoginState();
 
@@ -130,13 +131,10 @@ function ajaxRequest(method, url, data, callback) {
   }
 
 
-function editForm(){
+function submitEditForm(){
   event.preventDefault();
-  var form = this; // to clear the form
 
-  console.log(form);
-
-  var method = $(this).attr('method'); // attribute to the form the right methode
+  var method = 'PUT'; // attribute to the form the right methode
   var url = "http://localhost:3000/api" + $(this).attr('action'); //post to this url and do this action
   var data = $(this).serialize(); // we don't use json because we have put url encoded in our app.js // the data sort like name=Mike&email=mike.hayden@ga.co
 
