@@ -8,6 +8,7 @@ $(function(){
   $('.userLocationForm').on('submit', submitLocationForm);
   $('.package-link').on('click', showCreatePackage);
   $('.createPackageForm').on('submit', submitPackageForm);
+  $('.userEditForm').on('submit', submitEditForm);  
 
   // Add event listener to links
   $(".linkToRegister").click(function(){
@@ -24,7 +25,7 @@ $(function(){
     $('.linkToRegister').removeClass('hidden');
   });
 
-  // Create map
+  // Create default map
   createMap(51.5072, -0.1275, 10);
 
   // Check login state
@@ -118,6 +119,9 @@ function checkLoginState(){
 function logout(){
   removeToken();
   loggedOutState();
+
+  // Create default map
+  createMap(51.5072, -0.1275, 10);
 }
 
 function removeToken() {
@@ -186,6 +190,41 @@ function submitLocationForm(){
     });
   }
 
+function populateEditForm(){
+  // event.preventDefault();
+  // if(getToken()) {
+
+    var method = 'GET';
+    var user = currentUser();
+
+    var url = "http://localhost:3000/api/users/" + user._id;
+    ajaxRequest(method, url, null, function(data) {
+      var user = data.user;
+        $('.editUsername').val(user.username);
+        $('.editEmail').val(user.email);
+        $('.editAvatar').val(user.avatar);
+    });
+  // }
+  // else {
+  //   console.log("No token found, not populating edit form");
+  // }
+
+}
+
+function submitEditForm(){
+  event.preventDefault();
+
+  var method = 'PUT';
+  var user = currentUser(); // attribute to the form the right methode
+  console.log("USER ID: " + user._id);
+  var url = "http://localhost:3000/api/users/" + user._id; //post to this url and do this action
+  var data = $(this).serialize(); // we don't use json because we have put url encoded in our app.js // the data sort like name=Mike&email=mike.hayden@ga.co
+
+  ajaxRequest(method, url, data, function(user) {
+    console.log(user);
+  });
+} 
+
 function submitPackageForm(){
 
   event.preventDefault();
@@ -230,6 +269,11 @@ function loggedInState(){
   $('.loginContainer').hide();
   $('.formContainer').show();
   $('.packageForm').hide();
+
+
+  // Test edit form population functionality
+  populateEditForm();
+
   // Make request for markers from DB
   ajaxRequest("get", "http://localhost:3000/api/packages", null, createMarkers);
   $('.logoutbtn').show();
@@ -237,12 +281,14 @@ function loggedInState(){
 
 function currentUser() {
   var token = getToken();
-  var payload = token.split('.')[1];
-  payload = window.atob(payload);
-  payload = JSON.parse(payload);
-  console.log("PAYLOAD: " + payload);
-  console.log("PAYLOAD USER ID: " + payload._id);
-  return payload;
+  if(token){
+    var payload = token.split('.')[1];
+    payload = window.atob(payload);
+    payload = JSON.parse(payload);
+    console.log("PAYLOAD: " + payload);
+    console.log("PAYLOAD USER ID: " + payload._id);
+    return payload;
+  }
 }
 
 
