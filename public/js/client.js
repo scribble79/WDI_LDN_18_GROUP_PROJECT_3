@@ -5,6 +5,7 @@ $(function(){
   $('.loginForm').on('submit', submitLoginRegisterForm);
   $('.registerForm').on('submit', submitLoginRegisterForm);
   $('.userLocationForm').on('submit', submitLocationForm);
+  $('.package-link').on('click', createPackage);
 
   // Create map
   createMap(51.5072, -0.1275, 10);
@@ -141,6 +142,7 @@ function submitLocationForm(){
 function loggedInState(){
   // $('.loginContainer').hide();
   $('.formContainer').show();
+  $('.packageForm').hide();
   // getUsers();
 }
 
@@ -207,4 +209,9 @@ function logout(){
 function removeToken() {
     // remove the token from localStorage
     return localStorage.removeItem('token');
+}
+
+function createPackage() {
+  $('.menuContainer').hide();
+  $('.packageForm').show();
 }
