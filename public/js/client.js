@@ -8,7 +8,7 @@ $(function(){
   $('.userLocationForm').on('submit', submitLocationForm);
   $('.package-link').on('click', showCreatePackage);
   $('.createPackageForm').on('submit', submitPackageForm);
-  $('.userEditForm').on('submit', submitEditForm);  
+  $('.userEditForm').on('submit', submitEditForm);
 
   // Add event listener to links
   $(".linkToRegister").click(function(){
@@ -223,7 +223,7 @@ function submitEditForm(){
   ajaxRequest(method, url, data, function(user) {
     console.log(user);
   });
-} 
+}
 
 function submitPackageForm(){
 
@@ -231,7 +231,9 @@ function submitPackageForm(){
 
   var form = this;
 
-  // var user = currentUser();
+  var user = currentUser();
+  console.log("New package user id: " + user._id);
+
   var method = $(this).attr('method');
   var url = "http://localhost:3000/api" + $(this).attr('action');
   var postcode = $('.newPackagePostcode').val();
@@ -247,6 +249,7 @@ function submitPackageForm(){
       console.log(lat,lng);
 
       var package = {
+        user: user,
         contents: $('.packageContent').val(),
         note: $('.packageNote').val(),
         contact: $('.packageContact').val(),
