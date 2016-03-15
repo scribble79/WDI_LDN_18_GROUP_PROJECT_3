@@ -5,7 +5,23 @@ $(function(){
   $('.loginForm').on('submit', submitLoginRegisterForm);
   $('.registerForm').on('submit', submitLoginRegisterForm);
   $('.userLocationForm').on('submit', submitLocationForm);
-  $('.package-link').on('click', createPackage);
+  $('.package-link').on('click', showCreatePackage);
+  $('.createPackageForm').on('submit', submitPackageForm);
+
+  // Add event listener to links
+  $(".linkToRegister").click(function(){
+    $('.loginForm').addClass('hidden');
+    $('.registerForm').removeClass('hidden');
+    $(this).addClass('hidden');
+    $('.linkToLogin').removeClass('hidden');
+  });
+
+  $(".linkToLogin").click(function(){
+    $('.loginForm').removeClass('hidden');
+    $('.registerForm').addClass('hidden');
+    $(this).addClass('hidden');
+    $('.linkToRegister').removeClass('hidden');
+  });
 
   // Create map
   createMap(51.5072, -0.1275, 10);
@@ -13,8 +29,6 @@ $(function(){
   // Check login state
   checkLoginState();
 
-  // // Make request for markers from DB
-  // ajaxRequest("get", "http://localhost:3000/api/packages", null, createMarkers);
 });
 
 // GLOBAL VARIABLES
@@ -31,7 +45,6 @@ function createMap(lat, lng, zoom){
     disableDefaultUI: true
   });
 }
-
 
 function createMarkers(packages){
   console.log("DATA FROM GET MARKERS AJAX REQUEST: " + packages);
@@ -61,7 +74,34 @@ function createMarkers(packages){
           infoWindow.open(map, marker);
         });
     });
+}
 
+function createMarker(package){
+  console.log("DATA FROM GET MARKER AJAX REQUEST: " + package);
+  console.log(package.lng);
+
+  var position = { lat: package.lat, lng: package.lng }
+
+  // console.log("MARKER POSITION: " + position.lat + " " + position.lng);
+
+  var marker = new google.maps.Marker({
+    position: position,
+    map: map,
+    animation: google.maps.Animation.DROP
+  });
+
+  var infoWindow = new google.maps.InfoWindow({
+    position: position,
+    content: package.contents[0],
+
+  });
+
+    marker.addListener('click', function() {
+    // console.log('Clicked marker');
+      if(currentInfoWindow) currentInfoWindow.close();
+        currentInfoWindow = infoWindow;
+        infoWindow.open(map, marker);
+      });
 }
 
 ////// AUTHENTICATIONS REQUEST ////////
@@ -116,11 +156,7 @@ function submitLocationForm(){
         var lat = results[0].geometry.location.lat();
         var lng = results[0].geometry.location.lng();
         console.log(lat,lng);
-        // console.log("Geometry keys: " + Object.keys(results[0].geometry.location));
 
-        // console.log("Location coordinates: " + coordinates);
-        // console.log("TYPE OF COORDINATES DATA " + $.type(coordinates));
-        // console.log("Location coordinates: " + results[0].geometry.location.lng);
         var location = {
           userId: user._id,
           lng: lng,
@@ -129,21 +165,61 @@ function submitLocationForm(){
 
         // Create map, centered on location entered
         createMap(location.lat, location.lng, 15);
-        // Make request for markers from DB
-        ajaxRequest("get", "http://localhost:3000/api/packages", null, createMarkers);
-
 
         // Make request to API to add location to user
         ajaxRequest("patch", url, location, authenticationSuccessful);
+
+        // Show correct containers
+        checkLoginState();
       }
     });
   }
 
+function submitPackageForm(){
+
+  event.preventDefault();
+
+  var form = this;
+
+  // var user = currentUser();
+  var method = $(this).attr('method');
+  var url = "http://localhost:3000/api" + $(this).attr('action');
+  var postcode = $('.newPackagePostcode').val();
+
+  // GEOCODE POSTCODE FROM NEW PACKAGE
+  var geocoder = new google.maps.Geocoder();
+
+  geocoder.geocode({ 'address': postcode }, function(results, status){
+    if(status === google.maps.GeocoderStatus.OK) {
+
+      var lat = results[0].geometry.location.lat();
+      var lng = results[0].geometry.location.lng();
+      console.log(lat,lng);
+
+      var package = {
+        contents: $('.packageContent').val(),
+        note: $('.packageNote').val(),
+        contact: $('.packageContact').val(),
+        lat: lat,
+        lng: lng
+      }
+
+      var position = { lat: package.lat, lng: package.lng }
+
+      console.log("SUBMITTED NEW PACKAGE DATA: " + package);
+      console.log("New package lat and lng: " + package.lat + ", " + package.lng);
+
+      // Make request to API to add package and create new pin as callback
+      ajaxRequest("post", url, package, createMarker);
+    }
+  });
+}
+
 function loggedInState(){
-  // $('.loginContainer').hide();
+  $('.loginContainer').hide();
   $('.formContainer').show();
-  $('.packageForm').hide();
-  // getUsers();
+  // Make request for markers from DB
+  ajaxRequest("get", "http://localhost:3000/api/packages", null, createMarkers);
 }
 
 function currentUser() {
@@ -167,7 +243,12 @@ function authenticationSuccessful(data) {
     if(data.token) setToken(data.token);
 
     // Show and hide the appropriate panels
-    checkLoginState();
+    // checkLoginState();
+    $('.loginForm').addClass('hidden');
+    $('.registerForm').addClass('hidden');
+    $('.userLocationForm').removeClass('hidden');
+    $('.linkToLogin').addClass('hidden');
+    $('.linkToRegister').addClass('hidden');
   }
 
 
@@ -210,7 +291,7 @@ function removeToken() {
     return localStorage.removeItem('token');
 }
 
-function createPackage() {
+function showCreatePackage() {
   $('.menuContainer').hide();
   $('.packageForm').show();
 }
