@@ -9,6 +9,8 @@ $(function(){
   $('.package-link').on('click', showCreatePackage);
   $('.createPackageForm').on('submit', submitPackageForm);
   $('.userEditForm').on('submit', submitEditForm);
+  $('.userEditLink').on('click', showEditForm);
+  $('.manageDonationLink').on('click', showManagePackages);
 
   // Add event listener to links
   $(".linkToRegister").click(function(){
@@ -31,12 +33,19 @@ $(function(){
   // Check login state
   checkLoginState();
 
+  // Set initial state of menu
+  initialMenuState();
+
 });
 
 // GLOBAL VARIABLES
 
 var map;
 var currentInfoWindow;
+
+function initialMenuState(){
+  $('.userEditForm').addClass('hidden');
+}
 
 function createMap(lat, lng, zoom){
   // Make a new map
@@ -270,7 +279,7 @@ function submitPackageForm(){
 function loggedInState(){
   $('.loginContainer').hide();
   $('.formContainer').show();
-  $('.navbarButton').hide();
+  $('.backButton').hide();
   $('.packageForm').hide();
 
 
@@ -356,4 +365,14 @@ function showCreatePackage() {
   $('.menuContainer').hide();
   $('.packageForm').show();
   $('.navbarButton').show();
+}
+
+function showManagePackages(){
+  $('.menuContainer').hide();
+  $('.userEditForm').hide();
+}
+
+function showEditForm(){
+  $('.menuContainer').hide();
+  $('.userEditForm').show();
 }
