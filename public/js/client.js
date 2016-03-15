@@ -7,7 +7,7 @@ $(function(){
   $('.userLocationForm').on('submit', submitLocationForm);
 
   // Create map
-  createMap();
+  createMap(51.5072, -0.1275, 10);
 
   // Check login state
   checkLoginState();
