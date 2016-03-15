@@ -150,12 +150,12 @@ function submitLocationForm(){
 
         // Create map, centered on location entered
         createMap(location.lat, location.lng, 15);
-        // Make request for markers from DB
-        ajaxRequest("get", "http://localhost:3000/api/packages", null, createMarkers);
-
 
         // Make request to API to add location to user
         ajaxRequest("patch", url, location, authenticationSuccessful);
+
+        // Show form container
+        $('.formContainer').show();
       }
     });
   }
@@ -163,8 +163,8 @@ function submitLocationForm(){
 function loggedInState(){
   $('.loginContainer').hide();
   $('.formContainer').show();
-  $('.packageForm').hide();
-  // getUsers();
+  // Make request for markers from DB
+  ajaxRequest("get", "http://localhost:3000/api/packages", null, createMarkers);
 }
 
 function currentUser() {
