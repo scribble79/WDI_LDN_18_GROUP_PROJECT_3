@@ -2,6 +2,7 @@ $(function(){
   console.log("Jake Weary at your service");
   $('form').on('submit', submitForm);
   createMap();
+  checkLoginState();
 
   ajaxRequest("get", "http://localhost:3000/api/packages", null, createMarkers);
 });
@@ -20,6 +21,7 @@ function createMap(){
     disableDefaultUI: true
   });
 }
+
 
 function createMarkers(packages){
   console.log("DATA FROM GET MARKERS AJAX REQUEST: " + packages);
@@ -49,12 +51,18 @@ function createMarkers(packages){
           infoWindow.open(map, marker);
         });
     });
-  
+
 }
 
-
-
 ////// AUTHENTICATIONS REQUEST ////////
+
+function checkLoginState(){
+  if(getToken()){
+    loggedInState();
+  } else{
+    loggedOutState();
+  }
+}
 
 function submitForm(){
   // get the data from the forms and make an ajaxRequest
@@ -72,12 +80,25 @@ function submitForm(){
   ajaxRequest(method, url, data, authenticationSuccessful);
   }
 
+function loggedInState(){
+  $('.loginContainer').hide();
+  $('.formContainer').show();
+  // getUsers();
+}
+
+function loggedOutState(){
+  $('.loginContainer').show();
+  $('.formContainer').hide();
+}
 
 function authenticationSuccessful(data) {
     // set the token and call checkLoginState
     if(data.token) setToken(data.token);
 
+    // Show and hide the appropriate panels
+    checkLoginState();
   }
+
 
 function setToken(token) {
     // set the token into localStorage
