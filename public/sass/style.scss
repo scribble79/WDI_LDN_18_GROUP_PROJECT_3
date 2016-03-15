@@ -45,7 +45,21 @@ input {
   /*padding: 10px !important;*/
 }
 
+.navbarButton {
+  color: pink !important;
+  width: 240px;
+  margin-top: 5px;
+  height: calc(25% - 5px);
+}
+
+.backward {
+  color: green !important;
+}
+
 button {
   width: 100%;
   margin: 0;
 }
+
+
+
