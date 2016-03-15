@@ -7,7 +7,7 @@ $(function(){
   $('.userLocationForm').on('submit', submitLocationForm);
 
   // Create map
-  createMap();
+  // createMap();
 
   // Check login state
   checkLoginState();
@@ -21,12 +21,12 @@ $(function(){
 var map;
 var currentInfoWindow;
 
-function createMap(){
+function createMap(lat, lng){
   // Make a new map
   map = new google.maps.Map($('#map')[0], {
     // Pass in parameters to the map
     zoom: 12,
-    center: { lat: 51.506178, lng: -0.088369 },
+    center: { lat: lat, lng: lng },
     disableDefaultUI: true
   });
 }
@@ -125,6 +125,9 @@ function submitLocationForm(){
           lng: lng,
           lat: lat
         }
+
+        // Create map, centered on location entered
+        createMap(location.lat, location.lng);
 
         // Make request to API to add location to user
         ajaxRequest("patch", url, location, authenticationSuccessful);
