@@ -51,7 +51,7 @@ function createMarkers(packages){
           infoWindow.open(map, marker);
         });
     });
-  
+
 }
 
 ////// AUTHENTICATIONS REQUEST ////////
@@ -95,6 +95,8 @@ function authenticationSuccessful(data) {
     // set the token and call checkLoginState
     if(data.token) setToken(data.token);
 
+    // Show and hide the appropriate panels
+    checkLoginState();
   }
 
 
