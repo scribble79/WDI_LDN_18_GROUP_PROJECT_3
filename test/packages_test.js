@@ -12,10 +12,10 @@ var Package = require('../models/Package');
 var packageId;
 
 
-beforeEach(function(done){
+beforeEach(function(done){  
   mongoose.connect('mongodb://localhost/excess', function(){
     mongoose.connection.db.dropDatabase(function(){
-      Package.create({contents: ['Testing']}, function(err,package){
+      Package.create({contents: ['Jaffa Cakes'], lat:51.5132, lng:-0.3043 },{contents: ['Chicken soup', 'bread'], lat: 51.5653, lng:-0.1964},{contents:['Burgers'], lat: 51.5333, lng:0.1333}, function(err, package){
         packageId = package._id.toString();
         done(err);
       });
