@@ -35,10 +35,16 @@ router.route('/register')
 router.route('/login')
   .post(authenticationController.login);
 
+
+router.route('/addLocation')
+  .patch(authenticationController.addLocation);
+
+router.route('/users')
+  .get(authenticationController.usersIndex);
+
 router.route('/users/:id')
   .put(userController.update);
 
-  
 // router.post('/login', authenticationController.login);
 // router.post('/register', authenticationController.register);
 

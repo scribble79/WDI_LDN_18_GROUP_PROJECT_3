@@ -1,21 +1,25 @@
-var User = require('../models/user');
+var User = require('../models/User');
 var jwt  = require('jsonwebtoken');
 var secret = require('../config/tokens').secret;
 
 function register(req, res) {
- User.create(req.body.user, function(err, user) {
-   // tidy up mongoose's awful error messages
-   if(err) {
-     if(err.code && (err.code === 11000 || err.code === 11001)) {
-       var attribute = err.message.match(/\$([a-z]+)_/)[1];
-       err = "An account with that " + attribute + " already exists";
-     }
-     return res.status(400).json({ message: err.toString() });
-   }
+  User.create(req.body.user, function(err, user) {
+    // tidy up mongoose's awful error messages
+    if(err) {
+      if(err.code && (err.code === 11000 || err.code === 11001)) {
+        var attribute = err.message.match(/\$([a-z]+)_/)[1];
+        err = "An account with that " + attribute + " already exists";
+      }
+      return res.status(400).json({ message: err.toString() });
+    }
 
-   var token = jwt.sign(user, secret, "24h");
-   return res.status(200).json({ message: "Thanks for registering", user: user, token: token });
- });
+    // TokenPayload restricts the user info sent to the token
+    var tokenPayLoad = { _id: user._id, username: user.username, email: user.email };
+    var token = jwt.sign(tokenPayLoad, secret, { expiresIn: '24h' });
+
+    //  var token = jwt.sign(user, secret, "24h");
+    return res.status(200).json({ message: "Thanks for registering", user: user, token: token });
+  });
 }
 
 function login(req, res) {
@@ -29,12 +33,40 @@ function login(req, res) {
   if(err) return res.send(500).json({ message: err });
   if(!user || !user.validatePassword(req.body.user.password)) return res.status(401).json({ message: "Unauthorized" });
 
-  var token = jwt.sign(user, secret, "24h");
+  // TokenPayload restricts the user info sent to the token
+  var tokenPayLoad = { _id: user._id, username: user.username, email: user.email };
+  var token = jwt.sign(tokenPayLoad, secret, { expiresIn: '24h' });
+  // var token = jwt.sign(user, secret, "24h");
+
   return res.status(200).json({ message: "Login successful", user: user, token: token });
  });
 }
 
+function addLocation(req, res){
+
+  console.log("SUBMITTED LOCATION FORM DATA: " + req.body.userId);
+  var id = req.body.userId;
+  var lng = req.body.lng;
+  var lat = req.body.lat;
+
+  User.findByIdAndUpdate(id, req.body, function(err, user){
+    console.log("USER ADDING LOCATION FOR: " + user.username);
+    if(err) return res.send(500).json({ message: err });
+    return res.status(200).json({ message: "Location added to user", user: user});
+  });
+
+}
+
+function usersIndex(req, res) {
+  User.find({}, function(err, users){
+  if(err) return res.send(500).json({ message: err });
+  return res.status(200).json({ users: users });
+  });
+}
+
 module.exports = {
  login: login,
- register: register
-};
+ register: register,
+ addLocation: addLocation,
+ usersIndex: usersIndex
+}

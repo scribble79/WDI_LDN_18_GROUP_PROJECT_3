@@ -4,6 +4,8 @@ var bcrypt = require('bcrypt');
 var userSchema = mongoose.Schema({
   username: { type: String, unique: true, required: true },
   avatar: String,
+  lat: Number,
+  lng: Number,
   packages: [{type: mongoose.Schema.ObjectId, ref: 'Package'}],
   email:    { type: String, unique: true, required: true },
   passwordHash: { type: String, required: true }
