@@ -46,6 +46,9 @@ router.route('/users/:id')
   .get(userController.show)
   .put(userController.update);
 
+router.route('/userPackages')
+  .post(userController.showPackages)
+
 router.post('/login', authenticationController.login);
 router.post('/register', authenticationController.register);
 

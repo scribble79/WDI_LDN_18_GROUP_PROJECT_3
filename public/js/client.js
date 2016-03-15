@@ -10,7 +10,7 @@ $(function(){
   $('.createPackageForm').on('submit', submitPackageForm);
   $('.userEditForm').on('submit', submitEditForm);
   $('.userEditLink').on('click', showEditForm);
-  $('.manageDonationLink').on('click', showManagePackages);
+  $('.manageDonationsLink').on('click', showManagePackages);
 
   // Add event listener to links
   $(".linkToRegister").click(function(){
@@ -45,6 +45,7 @@ var currentInfoWindow;
 
 function initialMenuState(){
   $('.userEditForm').addClass('hidden');
+  $('.user-packages').addClass('hidden');
 }
 
 function createMap(lat, lng, zoom){
@@ -370,6 +371,17 @@ function showCreatePackage() {
 function showManagePackages(){
   $('.menuContainer').hide();
   $('.userEditForm').hide();
+  $('.user-packages').removeClass('hidden');
+
+  // Get user id
+  var user = currentUser();
+
+  // Populate user-packages
+  ajaxRequest("POST", "http://localhost:3000/api/userPackages", user, populatePackages);
+}
+
+function populatePackages(data) {
+  console.log("User's packages: " + data.packages.length);
 }
 
 function showEditForm(){
