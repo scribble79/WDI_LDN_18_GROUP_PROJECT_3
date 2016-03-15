@@ -46,7 +46,6 @@ function createMap(lat, lng, zoom){
   });
 }
 
-
 function createMarkers(packages){
   console.log("DATA FROM GET MARKERS AJAX REQUEST: " + packages);
   console.log(packages[0].lng);
@@ -75,7 +74,34 @@ function createMarkers(packages){
           infoWindow.open(map, marker);
         });
     });
+}
 
+function createMarker(package){
+  console.log("DATA FROM GET MARKER AJAX REQUEST: " + package);
+  console.log(package.lng);
+
+  var position = { lat: package.lat, lng: package.lng }
+
+  // console.log("MARKER POSITION: " + position.lat + " " + position.lng);
+
+  var marker = new google.maps.Marker({
+    position: position,
+    map: map,
+    animation: google.maps.Animation.DROP
+  });
+
+  var infoWindow = new google.maps.InfoWindow({
+    position: position,
+    content: package.contents[0],
+
+  });
+
+    marker.addListener('click', function() {
+    // console.log('Clicked marker');
+      if(currentInfoWindow) currentInfoWindow.close();
+        currentInfoWindow = infoWindow;
+        infoWindow.open(map, marker);
+      });
 }
 
 ////// AUTHENTICATIONS REQUEST ////////
@@ -130,11 +156,7 @@ function submitLocationForm(){
         var lat = results[0].geometry.location.lat();
         var lng = results[0].geometry.location.lng();
         console.log(lat,lng);
-        // console.log("Geometry keys: " + Object.keys(results[0].geometry.location));
 
-        // console.log("Location coordinates: " + coordinates);
-        // console.log("TYPE OF COORDINATES DATA " + $.type(coordinates));
-        // console.log("Location coordinates: " + results[0].geometry.location.lng);
         var location = {
           userId: user._id,
           lng: lng,
@@ -154,21 +176,43 @@ function submitLocationForm(){
   }
 
 function submitPackageForm(){
+
   event.preventDefault();
 
   var form = this;
 
+  // var user = currentUser();
   var method = $(this).attr('method');
   var url = "http://localhost:3000/api" + $(this).attr('action');
-  var package = {
-    contents: $('.packageContent').val(),
-    note: $('.packageNote').val(),
-    contact: $('.packageContact').val()
-  }
+  var postcode = $('.newPackagePostcode').val();
 
-  var data = {package: package}
-  ajaxRequest("post", "http://localhost:3000/api/packages", data)
+  // GEOCODE POSTCODE FROM NEW PACKAGE
+  var geocoder = new google.maps.Geocoder();
 
+  geocoder.geocode({ 'address': postcode }, function(results, status){
+    if(status === google.maps.GeocoderStatus.OK) {
+
+      var lat = results[0].geometry.location.lat();
+      var lng = results[0].geometry.location.lng();
+      console.log(lat,lng);
+
+      var package = {
+        contents: $('.packageContent').val(),
+        note: $('.packageNote').val(),
+        contact: $('.packageContact').val(),
+        lat: lat,
+        lng: lng
+      }
+
+      var position = { lat: package.lat, lng: package.lng }
+
+      console.log("SUBMITTED NEW PACKAGE DATA: " + package);
+      console.log("New package lat and lng: " + package.lat + ", " + package.lng);
+
+      // Make request to API to add package and create new pin as callback
+      ajaxRequest("post", url, package, createMarker);
+    }
+  });
 }
 
 function loggedInState(){
