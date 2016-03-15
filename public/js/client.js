@@ -5,6 +5,7 @@ $(function(){
   $('.loginForm').on('submit', submitLoginRegisterForm);
   $('.registerForm').on('submit', submitLoginRegisterForm);
   $('.userLocationForm').on('submit', submitLocationForm);
+  $('.package-link').on('click', createPackage);
 
   // Add event listener to links
   $(".linkToRegister").click(function(){
@@ -162,6 +163,7 @@ function submitLocationForm(){
 function loggedInState(){
   $('.loginContainer').hide();
   $('.formContainer').show();
+  $('.packageForm').hide();
   // getUsers();
 }
 
@@ -228,4 +230,9 @@ function logout(){
 function removeToken() {
     // remove the token from localStorage
     return localStorage.removeItem('token');
+}
+
+function createPackage() {
+  $('.menuContainer').hide();
+  $('.packageForm').show();
 }
