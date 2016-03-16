@@ -41,6 +41,9 @@ $(function(){
   // Set initial state of menu
   initialMenuState();
 
+
+  console.log($("#webmenu").imagepicker());
+
 });
 
 // GLOBAL VARIABLES
@@ -275,7 +278,7 @@ function submitPackageForm(){
 
       var package = {
         user: user,
-        contents: $('.packageContent').val(),
+        contents: $('.image-picker').val(),
         note: $('.packageNote').val(),
         contact: $('.packageContact').val(),
         lat: lat,
