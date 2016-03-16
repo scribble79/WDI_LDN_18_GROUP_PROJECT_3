@@ -87,6 +87,15 @@ input {
 }
 
 
+#loadingImage{
+  background: url('../food-icons/groceries.jpeg') no-repeat center fixed;
+  background-size: cover;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  z-index: 2;
+}
+
 
 button {
   width: 100%;

@@ -41,7 +41,7 @@ $(function(){
   // Set initial state of menu
   initialMenuState();
 
-
+  $('#loadingImage').fadeOut(3000);
   console.log($("#webmenu").imagepicker());
 
 });
