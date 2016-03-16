@@ -2,13 +2,12 @@
 
   <form class="editPackageForm hidden" action="/packages/edit" method="post">
 
-  <label for="editPackageContent">Package contents</label>  
-    <select multiple="multiple" name="webmenu" id="webmenu" class="editPackageContent">
-      <option value="fruit and veg" data-image="icons/icon_calendar.gif">Fruit and veg</option>
-      <option value="meat and fish" data-image="icons/icon_cart.gif">Meat and fish</option>
-      <option value="dairy and eggs" data-image="icons/icon_cd.gif">Dairy and eggs</option>
-      <option value="baked goods" data-image="icons/icon_cd.gif">Baked goods</option>
-      <option value="Staples" data-image="icons/icon_games.gif">Staples</option>
+    <select multiple="multiple" name="webmenu" id="webmenu" class="image-picker show-html editPackageContent">
+      <option data-img-src="/food-icons/png/fruit-1.png" value="fruit and veg">Fruit and Veg</option>
+      <option data-img-src="/food-icons/png/food-1.png" value="meat and fish">Meat and Fish</option>
+      <option data-img-src="/food-icons/png/food-6.png" value="dairy and eggs">Dairy and Eggs</option>
+      <option data-img-src="/food-icons/png/food-5.png" value="baked goods">Baked Goods</option>
+      <option data-img-src="/food-icons/png/food-7.png" value="staples">Staples</option>
     </select>
 
     <label for="editPreferredTime">Preferred collection time</label>

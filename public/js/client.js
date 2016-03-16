@@ -68,7 +68,8 @@ function createMap(lat, lng, zoom){
 }
 
 function createMarkers(packages){
-  console.log("DATA FROM GET MARKERS AJAX REQUEST: " + packages);
+  console.log("DATA FROM GET MARKERS AJAX REQUEST: ",packages);
+  removeAllMarkers();
 
   packages.forEach(function(package){
     var position = { lat: package.lat, lng: package.lng }
@@ -248,16 +249,15 @@ function submitEditForm(){
   var url = "/api/users/" + user._id; //post to this url and do this action
   var data = $(this).serialize(); // we don't use json because we have put url encoded in our app.js // the data sort like name=Mike&email=mike.hayden@ga.co
 
-  ajaxRequest(method, url, data, function(user) {
-    console.log(user);
-  });
+  this.reset();
+  ajaxRequest(method, url, data, loggedInState);
 }
 
 function submitPackageForm(){
 
   event.preventDefault();
 
-  var form = this;
+  var $form = $(this);
 
   var user = currentUser();
   console.log("New package user id: " + user._id);
@@ -274,11 +274,10 @@ function submitPackageForm(){
 
       var lat = results[0].geometry.location.lat();
       var lng = results[0].geometry.location.lng();
-      console.log(lat,lng);
-
+      console.log($form.find('select.image-picker').val());
       var package = {
         user: user,
-        contents: $('.image-picker').val(),
+        contents: $form.find('select.image-picker').val(),
         note: $('.packageNote').val(),
         contact: $('.packageContact').val(),
         lat: lat,
@@ -287,13 +286,25 @@ function submitPackageForm(){
 
       var position = { lat: package.lat, lng: package.lng }
 
-      console.log("SUBMITTED NEW PACKAGE DATA: " + package);
-      console.log("New package lat and lng: " + package.lat + ", " + package.lng);
+      map.panTo(position);
+      map.setZoom(15);
+
+      console.log("SUBMITTED NEW PACKAGE DATA:",package);
 
       // Make request to API to add package and create new pin as callback
       ajaxRequest("post", url, package, createMarker);
+
+      $form[0].reset();
+      loggedInState();
     }
   });
+}
+
+function removeAllMarkers(){
+  for(var i = 0; i<markers.length; i++){
+    markers[i].setMap(null);
+  }
+  markers = [];
 }
 
 function loggedInState(){
@@ -365,18 +376,18 @@ function getToken() {
 
 function ajaxRequest(method, url, data, callback) {
     // create a re-useable ajaxRequest function
-      return $.ajax({
-        method: method,
-        url: url,
-        data: data,
-        beforeSend: function(jqXHR, settings) {
-          var token = getToken();
-          if(token) return jqXHR.setRequestHeader('Authorization', 'Bearer ' + token);
-        }
-      })
-      .done(callback)
-      .fail(function(){
-      });
+    return $.ajax({
+      method: method,
+      url: url,
+      data: data,
+      beforeSend: function(jqXHR, settings) {
+        var token = getToken();
+        if(token) return jqXHR.setRequestHeader('Authorization', 'Bearer ' + token);
+      }
+    })
+    .done(callback)
+    .fail(function(){
+    });
   }
 
 function removeToken() {
@@ -385,6 +396,7 @@ function removeToken() {
 }
 
 function showCreatePackage() {
+  $('.createPackageForm')[0].reset();
   $('.menuContainer').hide();
   $('.packageForm').show();
   $('.navbarButton').show();
@@ -406,7 +418,9 @@ function showManagePackages(){
 
 function populatePackages(data) {
   $('.user-packages').empty();
+  console.log(data.packages);
   data.packages.forEach(function(package){
+    console.log("PACKAGE CONTENTS: " + package.contents);
     $('.user-packages').append("<button name='" + package.lat +","+ package.lng + "' class='packageEditButton' id='" + package._id + "'>" + package.contents + "</button>");
   });
   addEventListenersToPackages();
@@ -428,6 +442,9 @@ function addEventListenersToPackages(){
       map.panTo(position);
       map.setZoom(15);
 
+      // Hide all other edit buttons on click
+       $('.packageEditButton').not('#' + this.id).hide();
+
       // Handle view hiding/showing
       $('.editPackageForm').removeClass('hidden');
       $('.editPackageForm').show();
@@ -443,7 +460,7 @@ function populatePackageEditForm(packageId){
 
   ajaxRequest(method, url, null, function(data) {
     var package = data.package;
-    console.log("POPULATE PACKAGE EDIT DATA: " + data.package.contents);
+    console.log("POPULATE PACKAGE EDIT DATA: ",data.package.note);
     $('.editPackageNote').empty();
     $('.editPackageNote').html(package.note);
     $('.editPackageContent').val(package.contents);
@@ -468,12 +485,12 @@ function updatePackage(){
   var method = "patch";
   var url = "/api/packages/" + packageId;
 
-  ajaxRequest(method, url, package, function(data){
-    console.log("UPDATED PACKAGE");
+  ajaxRequest(method, url, package, function(){
+    ajaxRequest("get", "/api/packages", null, createMarkers);
   });
 
-  // Refresh markers
-  ajaxRequest("get", "/api/packages", null, createMarkers);
+  //Return to main menu
+  loggedInState();
 }
 
 function deletePackage(){
@@ -481,11 +498,8 @@ function deletePackage(){
   var method = "delete";
   var url = "/api/packages/" + packageId;
 
-  ajaxRequest(method, url, null, refreshMarkers)
-}
-
-function refreshMarkers(){
-  ajaxRequest("get", "/api/packages", null, createMarkers);
+  ajaxRequest(method, url, null, createMarkers);
+  loggedInState();
 }
 
 function showEditForm(){
