@@ -159,7 +159,7 @@ function submitLoginRegisterForm(){
   // console.log(form);
 
   var method = $(this).attr('method'); // attribute to the form the right method
-  var url = "http://localhost:3000/api" + $(this).attr('action'); //post to this url and do this action
+  var url = "/api" + $(this).attr('action'); //post to this url and do this action
   var data = $(this).serialize(); // we don't use json because we have put url encoded in our app.js // the data sort like name=Mike&email=mike.hayden@ga.co
 
   ajaxRequest(method, url, data, authenticationSuccessful);
@@ -174,7 +174,7 @@ function submitLocationForm(){
     var form = this;
 
     var method = $(this).attr('method');
-    var url = "http://localhost:3000/api" + $(this).attr('action');
+    var url = "/api" + $(this).attr('action');
 
     var postcode = $('.userPostcode').val()
 
@@ -217,7 +217,7 @@ function populateEditForm(){
     var method = 'GET';
     var user = currentUser();
 
-    var url = "http://localhost:3000/api/users/" + user._id;
+    var url = "/api/users/" + user._id;
     ajaxRequest(method, url, null, function(data) {
       var user = data.user;
         $('.editUsername').val(user.username);
@@ -237,7 +237,7 @@ function submitEditForm(){
   var method = 'PUT';
   var user = currentUser(); // attribute to the form the right methode
   console.log("USER ID: " + user._id);
-  var url = "http://localhost:3000/api/users/" + user._id; //post to this url and do this action
+  var url = "/api/users/" + user._id; //post to this url and do this action
   var data = $(this).serialize(); // we don't use json because we have put url encoded in our app.js // the data sort like name=Mike&email=mike.hayden@ga.co
 
   ajaxRequest(method, url, data, function(user) {
@@ -255,7 +255,7 @@ function submitPackageForm(){
   console.log("New package user id: " + user._id);
 
   var method = $(this).attr('method');
-  var url = "http://localhost:3000/api" + $(this).attr('action');
+  var url = "/api" + $(this).attr('action');
   var postcode = $('.newPackagePostcode').val();
 
   // GEOCODE POSTCODE FROM NEW PACKAGE
@@ -300,7 +300,7 @@ function loggedInState(){
 
 
   // Make request for markers from DB
-  ajaxRequest("get", "http://localhost:3000/api/packages", null, createMarkers);
+  ajaxRequest("get", "/api/packages", null, createMarkers);
   $('.logoutbtn').show();
 }
 
@@ -389,7 +389,7 @@ function showManagePackages(){
   var user = currentUser();
 
   // Populate user-packages
-  ajaxRequest("POST", "http://localhost:3000/api/userPackages", user, populatePackages);
+  ajaxRequest("POST", "/api/userPackages", user, populatePackages);
 }
 
 function populatePackages(data) {
@@ -425,7 +425,7 @@ function addEventListenersToPackages(){
 
 function populatePackageEditForm(packageId){
   var method = 'GET';
-  var url = "http://localhost:3000/api/packages/" + packageId;
+  var url = "/api/packages/" + packageId;
 
   ajaxRequest(method, url, null, function(data) {
     var package = data.package;
@@ -452,26 +452,26 @@ function updatePackage(){
   }
 
   var method = "patch";
-  var url = "http://localhost:3000/api/packages/" + packageId;
+  var url = "/api/packages/" + packageId;
 
   ajaxRequest(method, url, package, function(data){
     console.log("UPDATED PACKAGE");
   });
 
   // Refresh markers
-  ajaxRequest("get", "http://localhost:3000/api/packages", null, createMarkers);
+  ajaxRequest("get", "/api/packages", null, createMarkers);
 }
 
 function deletePackage(){
   var packageId = $('.editPackageId').val();
   var method = "delete";
-  var url = "http://localhost:3000/api/packages/" + packageId;
+  var url = "/api/packages/" + packageId;
 
   ajaxRequest(method, url, null, refreshMarkers)
 }
 
 function refreshMarkers(){
-  ajaxRequest("get", "http://localhost:3000/api/packages", null, createMarkers);
+  ajaxRequest("get", "/api/packages", null, createMarkers);
 }
 function showEditForm(){
   $('.menuContainer').hide();
