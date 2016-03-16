@@ -86,17 +86,6 @@ function createMarkers(packages){
 
     console.log("Package contents from db:",package.contents);
 
-    // var infoWindow = new google.maps.InfoWindow({
-    //   position: position,
-    //   content: '<div class="info-window"><h3>' + "Content: " + package.contents + '</h3>'+
-    //   '<p>'+ package.note + '</p>' +
-    //   '<p>' + package.contact + '</p>' +
-    //   '</div>'
-    //
-    // });
-
-    console.log("Package contents from db:",package.contents);
-
     var logos = "";
 
     // Loop through package contents, find each icon and add to logos string
@@ -125,12 +114,11 @@ function createMarkers(packages){
 
     var infoWindow = new google.maps.InfoWindow({
       position: position,
-        content: '<div class="info-window">' + logos + '<br>' + package.note + '</br>' +
+        content: '<div class="info-window">' + logos + '<br>'+ package.collection_time + '<br>' + package.note + '</br>' +
         '<br>' + package.contact + '</br></div>'
     });
 
       marker.addListener('click', function() {
-      // console.log('Clicked marker');
         if(currentInfoWindow) currentInfoWindow.close();
           currentInfoWindow = infoWindow;
           infoWindow.open(map, marker);
@@ -342,6 +330,7 @@ function submitPackageForm(){
         contents: $form.find('select.image-picker').val(),
         note: $('.packageNote').val(),
         contact: $('.packageContact').val(),
+        collection_time: $('.preferredTime').val(),
         lat: lat,
         lng: lng
       }
@@ -526,6 +515,7 @@ function populatePackageEditForm(packageId){
     $('.editPackageNote').empty();
     $('.editPackageNote').html(package.note);
     $('.editPackageContent').val(package.contents);
+    $('.editPackageContact').val(package.contact);
     $('.editPackageId').val(package._id);
   });
 }
@@ -541,7 +531,8 @@ function updatePackage(){
     user: user,
     contents: $('.editPackageContent').val(),
     note: $('.editPackageNote').val(),
-    contact: $('.packageContact').val()
+    contact: $('.editPackageContact').val(),
+    collection_time: $('.editPreferredTime').val()
   }
 
   var method = "patch";
