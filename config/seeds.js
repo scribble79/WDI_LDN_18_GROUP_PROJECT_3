@@ -33,23 +33,23 @@ User.create([{
   else console.log(users);
 
   Package.create([{
-    contents: ['Potatoes', 'Roule'],
+    contents: ['meat and fish'],
     lat: 51.5132,
     lng: 0.0777
   },{
-    contents: ['Cheese', 'Ham'],
+    contents: ['fruit and veg'],
     lat: 51.5081,
     lng: -0.1281
   },{
-    contents: ['Tinned Tomatoes'],
+    contents: ['dairy and eggs'],
     lat: 51.4839,
     lng: -0.0664
   },{
-    contents: ['Pizza'],
+    contents: ['baked goodds'],
     lat: 51.4999,
     lng: -0.1621
   },{
-    contents: ['Cereal', 'Eggs'],
+    contents: ['staples'],
     lat: 51.5768,
     lng: 0.1801
   }], function(err, packages){
