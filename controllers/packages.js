@@ -9,17 +9,15 @@ function packagesIndex(req, res){
 }
 
 function packagesCreate(req, res){
+  console.log(req.user);
   // console.log("PASSING USER WITH NEW PACKAGE : " + req.body.user._id);
-  var userId = req.body.user._id;
-  Package.create(req.body, function(err, package){
+  var userId = req.user._id;
+  Package.create(req.body.package, function(err, package){
     if (err) return res.status(404).json({ message: err });
-    console.log("PACKAGE ID: " + package._id);
-    console.log("USER ID: " + userId);
     User.findByIdAndUpdate(userId, { $push: { packages: package._id } }, function(err, user) {
       if (err) return res.status(404).json({ message: err });
+      return res.status(200).json({ package: package });
     });
-    console.log("PACKAGE RETURNED FROM CREATE: " + package.contents);
-    return res.status(200).json(package);
   });
 }
 

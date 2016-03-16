@@ -1,7 +1,7 @@
 var router = require('express').Router();
 var jwt = require('jsonwebtoken');
 
-// var secret = require('/tokens').secret;
+var secret = require('./tokens').secret;
 
 var packageController = require('../controllers/packages');
 var authenticationController = require('../controllers/authentications');
@@ -22,7 +22,7 @@ function secureRoute(req, res, next) {
 // ROUTES FOR SERVING DATA FOR THE API
 router.route('/packages')
   .get(packageController.index)
-  .post(packageController.create);
+  .post(secureRoute, packageController.create);
 
 router.route('/packages/:id')
   .get(packageController.show)
