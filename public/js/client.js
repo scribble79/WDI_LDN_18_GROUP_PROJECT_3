@@ -47,6 +47,7 @@ $(function(){
 
 var map;
 var currentInfoWindow;
+var markers = [];
 
 function initialMenuState(){
   $('.userEditForm').addClass('hidden');
@@ -77,11 +78,13 @@ function createMarkers(packages){
       animation: google.maps.Animation.DROP
     });
 
+    markers.push(marker);
+
     var infoWindow = new google.maps.InfoWindow({
       position: position,
       content: '<div class="info-window"><h3>' + "Content: " + package.contents + '</h3>'+
       '<p>'+ package.note + '</p>' +
-      '<p>' + package.contact + '</p>' + 
+      '<p>' + package.contact + '</p>' +
       '</div>'
 
     });
@@ -109,11 +112,13 @@ function createMarker(package){
     animation: google.maps.Animation.DROP
   });
 
+  markers.push(marker);
+
   var infoWindow = new google.maps.InfoWindow({
     position: position,
-      content: '<div class="info-window"><h3>' + "Content: " + package.contents + 
+      content: '<div class="info-window"><h3>' + "Content: " + package.contents +
       '</h3>'+ '<h4>'+ '<br>' + package.note + '</br>' +
-      '<br>' + package.contact + '</br>' + 
+      '<br>' + package.contact + '</br>' +
       '</h4></div>'
   });
 
@@ -295,13 +300,15 @@ function loggedInState(){
   $('.userEditForm').hide();
   $('.formContainer').show();
   $('.menuContainer').show();
+  $('.logoutbtn').show();
+  $('.user-packages').hide();
+  $('.editPackageForm').hide();
+
   // Test edit form population functionality
   populateEditForm();
 
-
   // Make request for markers from DB
   ajaxRequest("get", "/api/packages", null, createMarkers);
-  $('.logoutbtn').show();
 }
 
 function currentUser() {
@@ -384,6 +391,7 @@ function showManagePackages(){
   $('.userEditForm').hide();
   $('.navbarButton').show();
   $('.user-packages').removeClass('hidden');
+  $('.user-packages').show();
 
   // Get user id
   var user = currentUser();
@@ -393,6 +401,7 @@ function showManagePackages(){
 }
 
 function populatePackages(data) {
+  $('.user-packages').empty();
   data.packages.forEach(function(package){
     $('.user-packages').append("<button name='" + package.lat +","+ package.lng + "' class='packageEditButton' id='" + package._id + "'>" + package.contents + "</button>");
   });
@@ -417,6 +426,7 @@ function addEventListenersToPackages(){
 
       // Handle view hiding/showing
       $('.editPackageForm').removeClass('hidden');
+      $('.editPackageForm').show();
       $('.deletePackageButton').removeClass('hidden');
       $("#" + this.id).addClass('hidden');
     });
@@ -473,6 +483,7 @@ function deletePackage(){
 function refreshMarkers(){
   ajaxRequest("get", "/api/packages", null, createMarkers);
 }
+
 function showEditForm(){
   $('.menuContainer').hide();
   $('.userEditForm').show();
