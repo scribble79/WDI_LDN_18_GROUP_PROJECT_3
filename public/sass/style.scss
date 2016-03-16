@@ -78,12 +78,12 @@ textarea{
 // }
 
 .logoutbtn {
+  display: inline-block;
   position: absolute;
-  bottom: 5%;
-  right: 5%;
+  bottom: 20px;
+  right: 20px;
   width: inherit;
   background: white;
-  color: green !important
 }
 
 form {

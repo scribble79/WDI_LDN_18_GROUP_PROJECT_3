@@ -303,6 +303,7 @@ function loggedInState(){
   $('.logoutbtn').show();
   $('.user-packages').hide();
   $('.editPackageForm').hide();
+  $('.deletePackageButton').addClass('hidden');
 
   // Test edit form population functionality
   populateEditForm();
