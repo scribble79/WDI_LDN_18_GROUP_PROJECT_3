@@ -45,7 +45,7 @@ User.create([{
     lat: 51.4839,
     lng: -0.0664
   },{
-    contents: ['baked goodds'],
+    contents: ['baked goods'],
     lat: 51.4999,
     lng: -0.1621
   },{
