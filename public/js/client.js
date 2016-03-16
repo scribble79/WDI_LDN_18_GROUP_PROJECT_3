@@ -222,6 +222,7 @@ function submitLocationForm(){
 function populateEditForm(){
   // event.preventDefault();
   // if(getToken()) {
+  $("#webmenu1").imagepicker();
 
     var method = 'GET';
     var user = currentUser();
@@ -237,7 +238,6 @@ function populateEditForm(){
   // else {
   //   console.log("No token found, not populating edit form");
   // }
-
 }
 
 function submitEditForm(){
