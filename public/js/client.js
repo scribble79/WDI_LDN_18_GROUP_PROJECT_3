@@ -269,11 +269,19 @@ function submitPackageForm(){
 
       var lat = results[0].geometry.location.lat();
       var lng = results[0].geometry.location.lng();
-      console.log(lat,lng);
+
+      var $contentsValue = $('.image-picker').val();
+      console.log($contentsValue);
+
+
+      var $contents = $("option[value='"+$contentsValue+"']").attr("data-img-src");
+      var logo = "<img src='"+$contents+"'>";
+      console.log($contents);
+
 
       var package = {
         user: user,
-        contents: $('.image-picker').val(),
+        contents: logo,
         note: $('.packageNote').val(),
         contact: $('.packageContact').val(),
         lat: lat,
