@@ -12,6 +12,7 @@ $(function(){
   $('.userEditForm').on('submit', submitEditForm);
   $('.userEditLink').on('click', showEditForm);
   $('.manageDonationsLink').on('click', showManagePackages);
+  $('.deletePackageButton').on('click', deletePackage);
 
   // Add event listener to links
   $(".linkToRegister").click(function(){
@@ -383,7 +384,7 @@ function showManagePackages(){
 
 function populatePackages(data) {
   data.packages.forEach(function(package){
-    $('.user-packages').append("<button class='packageEditButton' id='" + package._id + "'>" + package.contents + "</button>");
+    $('.user-packages').append("<button name='" + package.lat +","+ package.lng + "' class='packageEditButton' id='" + package._id + "'>" + package.contents + "</button>");
   });
   addEventListenersToPackages();
 }
@@ -395,6 +396,14 @@ function addEventListenersToPackages(){
     packageEditButtons[i].addEventListener('click', function(){
       console.log(this.id);
       populatePackageEditForm(this.id);
+
+      console.log("Clicked package position: " + this.name.split(',')[0]);
+
+      var position = { lat: parseFloat(this.name.split(',')[0]), lng: parseFloat(this.name.split(',')[1])}
+
+      // Pan map to marker
+      map.panTo(position);
+      map.setZoom(15);
 
       // Handle view hiding/showing
       $('.editPackageForm').removeClass('hidden');
@@ -420,7 +429,7 @@ function populatePackageEditForm(packageId){
 }
 
 function updatePackage(){
-  
+
   event.preventDefault();
 
   var user = currentUser();
@@ -439,8 +448,22 @@ function updatePackage(){
   ajaxRequest(method, url, package, function(data){
     console.log("UPDATED PACKAGE");
   });
+
+  // Refresh markers
+  ajaxRequest("get", "http://localhost:3000/api/packages", null, createMarkers);
 }
 
+function deletePackage(){
+  var packageId = $('.editPackageId').val();
+  var method = "delete";
+  var url = "http://localhost:3000/api/packages/" + packageId;
+
+  ajaxRequest(method, url, null, refreshMarkers)
+}
+
+function refreshMarkers(){
+  ajaxRequest("get", "http://localhost:3000/api/packages", null, createMarkers);
+}
 function showEditForm(){
   $('.menuContainer').hide();
   $('.userEditForm').show();
