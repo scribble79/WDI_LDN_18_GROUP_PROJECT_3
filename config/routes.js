@@ -26,7 +26,7 @@ router.route('/packages')
 
 router.route('/packages/:id')
   .get(packageController.show)
-  .put(packageController.update)
+  .patch(packageController.update)
   .delete(packageController.delete);
 
 router.route('/register')

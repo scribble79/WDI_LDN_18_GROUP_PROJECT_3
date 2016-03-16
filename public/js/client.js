@@ -6,6 +6,7 @@ $(function(){
   $('.logoutbtn').on('click', logout);
   $('.registerForm').on('submit', submitLoginRegisterForm);
   $('.userLocationForm').on('submit', submitLocationForm);
+  $('.editPackageForm').on('submit', updatePackage)
   $('.package-link').on('click', showCreatePackage);
   $('.createPackageForm').on('submit', submitPackageForm);
   $('.userEditForm').on('submit', submitEditForm);
@@ -381,10 +382,62 @@ function showManagePackages(){
 }
 
 function populatePackages(data) {
-  // console.log("User's packages: " + data.packages.length);
   data.packages.forEach(function(package){
-    // console.log(package.contents);
-    $('.user-packages').append("<button class='" + package._id + "'>" + package.contents + "</button>");
+    $('.user-packages').append("<button class='packageEditButton' id='" + package._id + "'>" + package.contents + "</button>");
+  });
+  addEventListenersToPackages();
+}
+
+function addEventListenersToPackages(){
+  var packageEditButtons = $('.packageEditButton');
+
+  for(var i = 0; i < packageEditButtons.length; i++) {
+    packageEditButtons[i].addEventListener('click', function(){
+      console.log(this.id);
+      populatePackageEditForm(this.id);
+
+      // Handle view hiding/showing
+      $('.editPackageForm').removeClass('hidden');
+      $('.deletePackageButton').removeClass('hidden');
+      $("#" + this.id).addClass('hidden');
+    });
+  }
+}
+
+function populatePackageEditForm(packageId){
+  var method = 'GET';
+  var url = "http://localhost:3000/api/packages/" + packageId;
+
+  ajaxRequest(method, url, null, function(data) {
+    var package = data.package;
+    console.log("POPULATE PACKAGE EDIT DATA: " + data.package.contents);
+    $('.editPackageNote').empty();
+    $('.editPackageNote').html(package.note);
+    $('.editPackageContent').val(package.contents);
+    $('.editPackageId').val(package._id);
+  });
+
+}
+
+function updatePackage(){
+  
+  event.preventDefault();
+
+  var user = currentUser();
+  var packageId = $('.editPackageId').val();
+
+  var package = {
+    user: user,
+    contents: $('.editPackageContent').val(),
+    note: $('.editPackageNote').val(),
+    contact: $('.packageContact').val()
+  }
+
+  var method = "patch";
+  var url = "http://localhost:3000/api/packages/" + packageId;
+
+  ajaxRequest(method, url, package, function(data){
+    console.log("UPDATED PACKAGE");
   });
 }
 
