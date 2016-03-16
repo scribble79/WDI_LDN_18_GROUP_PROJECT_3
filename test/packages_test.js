@@ -44,11 +44,13 @@ describe('GET /packages', function(){
   it('should return a 200 response', function(done){
     api.get('/api/packages')
       .set('Accept', 'application/json')
+      .set('Authorization', 'Bearer ' + token)
       .expect(200,done);
   });
   it('should return an array', function(done){
     api.get('/api/packages')
       .set('Accept', 'application/json')
+      .set('Authorization', 'Bearer ' + token)
       .end(function(err, res){
         expect(res.body).to.be.an('array');
         done();
@@ -57,6 +59,7 @@ describe('GET /packages', function(){
   it('should return an array of objects that have a content property', function(done){
     api.get('/api/packages')
       .set('Accept', 'application/json')
+      .set('Authorization', 'Bearer ' + token)
       .end(function(err,res){
         expect(res.body[0]).to.have.property('contents');
         done();
@@ -92,6 +95,7 @@ describe('GET /packages/:id', function(){
   it('should return a 401 repsonse', function(done){
     api.get('/api/packages/' + packageId)
     .set('Accept', 'application/json')
+    .set('Authorization', 'Bearer ' + token)
     .expect(200, done);
   });
 });
@@ -101,6 +105,7 @@ describe('PUT /packages/:id', function(){
   it('should return a new package with an updated package object', function(done){
     api.put('/api/packages/' + packageId)
         .set('Accept', 'application/json')
+        .set('Authorization', 'Bearer ' + token)
         .send({
               package:
                   {
@@ -119,6 +124,7 @@ describe('DELETE /packages/:id', function(){
   it('should return a 204 response', function(done){
     api.delete('/api/packages/' + packageId)
       .set('Accept', 'application/json')
+      .set('Authorization', 'Bearer ' + token)
       .expect(204, done);
   });
 });

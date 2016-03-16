@@ -5,16 +5,27 @@
   <title>excess</title>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <script src="/js/image-picker.js"></script>
   <script src="/js/client.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxM36DxD-TmmCuWMML0UXBVSirOUkF42Q" charset="utf-8"></script>
 
   <link rel="stylesheet" href="/css/normalize.css" media="screen" title="no title" charset="utf-8">
   <link rel="stylesheet" href="/css/skeleton.css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="/css/image-picker.css" media="screen" title="no title" charset="utf-8">
   <link rel="stylesheet" href="/css/style.css" media="screen" title="no title" charset="utf-8">
 
 </head>
-<body>
 
+<body>
+  <div class="mediaIconsDiv">
+    <img class="socialIcon" src="/social_media_icons/facebook.png" alt="" />
+    <img class="socialIcon" src="/social_media_icons/linkedin.png" alt="" />
+    <img class="socialIcon" src="/social_media_icons/twitter2.png" alt="" />
+    <img class="socialIcon" src="/social_media_icons/youtube.png" alt="" />
+    <img class="socialIcon" src="/social_media_icons/reddit.png" alt="" />
+  </div>
+
+  <div id="errorBar"></div>
   <div id="map"></div>
 
 
@@ -24,10 +35,12 @@
 
   <div class="formContainer">
 
-      
+
     <%- include ./partials/_package %>
     <%- include ./partials/_navbar-side %>
     <%- include ./partials/_edit-user %>
+    <%- include ./partials/_user-packages %>
+    <%- include ./partials/_edit-package %>
 
     <button class="navbarButton backButton">Back</button>
 
@@ -41,7 +54,7 @@
 
   </div>
 
- 
+
 
 </body>
 </html>

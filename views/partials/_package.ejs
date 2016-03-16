@@ -1,18 +1,25 @@
 <div class="packageForm" >
 
-  <form class="createPackageForm" action="/packages" method="post">
-
-    <select multiple="multiple" name="webmenu" id="webmenu" class="packageContent">
-      <option value="fruit and veg" data-image="icons/icon_calendar.gif">Fruit and veg</option>
-      <option value="meat and fish" data-image="icons/icon_cart.gif">Meat and fish</option>
-      <option value="dairy and eggs" data-image="icons/icon_cd.gif">Dairy and eggs</option>
-      <option value="baked goods" data-image="icons/icon_cd.gif">Baked goods</option>
-      <option value="Staples" data-image="icons/icon_games.gif">Staples</option>
+  <form class="createPackageForm" action="/packages" method="POST">
+    <select multiple="multiple" name="webmenu" id="webmenu" class="image-picker show-html">
+      <option data-img-src="/food-icons/png/fruit-1.png" value="fruit and veg">Cute Kitten 1</option>
+      <option data-img-src="/food-icons/png/food-1.png" value="meat and fish">Cute Kitten 2</option>
+      <option data-img-src="/food-icons/png/food-6.png" value="dairy and eggs">Cute Kitten 3</option>
+      <option data-img-src="/food-icons/png/food-5.png" value="baked goods">Cute Kitten 4</option>
+      <option data-img-src="/food-icons/png/food-7.png" value="staples">Cute Kitten 4</option>
     </select>
 
-    <input type="textarea" name="package[note]" placeholder="Notes" class="packageNote">
-    <input type="text" name="package[contact]" placeholder="Contact details" class="packageContact">
-    <input type="text" class="newPackagePostcode" placeholder="Package Postcode">
+  <label for="preferredTime">Preferred collection time</label>
+    <select multiple="multiple" class="preferredTime">
+      <option value="morning">Morning</option>
+      <option value="afternoon">Afternoon</option>
+      <option value="evening">Evening</option>
+    </select>
+
+    <!-- <input type="textarea" name="package[note]" placeholder="Notes" class="packageNote"> -->
+    <textarea name="package[note]" placeholder="Notes" class="packageNote" rows="8"></textarea>
+    <input name="package[contact]" placeholder="Contact Details" class="packageContact">
+    <input name="package[postcode]" placeholder="Package Postcode" class="newPackagePostcode">
     <button type="submit">Submit the new package</button>
   </form>
 </div>

@@ -2,12 +2,42 @@ html, body {
   height: 100%; margin: 0; padding: 0;
 }
 
+.mediaIconsDiv {
+  position: absolute;
+  height: 100px;
+  // border: 5px solid red;
+  top: 0;
+  right: 15px;
+  z-index: 1;
+}
+
+.socialIcon {
+  width: 35px;
+  margin: 5px;
+  margin-top: 15px;
+  transition:all 1s ease-out;
+}
+
+.socialIcon:hover {
+  transform: rotate(360deg);
+  cursor: pointer;
+}
+
 .hidden {
   display: none;
 }
 
 #map {
   height: 100%;
+}
+
+select{
+  display: block;
+  width: 100%;
+}
+
+textarea{
+  width: 100%;
 }
 
 .formContainer {
@@ -21,7 +51,8 @@ html, body {
   background: white;
   border-radius: 10px;
   text-align: center;
-  border: 1px solid red;
+  // border: 1px solid red;
+  // overflow: scroll;
 }
 
 .loginContainer {
@@ -47,12 +78,12 @@ html, body {
 // }
 
 .logoutbtn {
+  display: inline-block;
   position: absolute;
-  bottom: 5%;
-  right: 5%;
+  bottom: 20px;
+  right: 20px;
   width: inherit;
   background: white;
-  color: green !important
 }
 
 form {
@@ -66,17 +97,16 @@ input {
 }
 
 .navbarButton {
-  color: pink !important;
-  width: 240px;
+  width: 100%;
   margin-top: 5px;
-  height: calc(25% - 5px);
-}
-
-.back {
-  color: green !important;
+  // height: calc(25% - 5px);
 }
 
 button {
   width: 100%;
   margin: 0;
+}
+
+.image-picker {
+  display: block;
 }

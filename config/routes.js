@@ -21,13 +21,13 @@ function secureRoute(req, res, next) {
 
 // ROUTES FOR SERVING DATA FOR THE API
 router.route('/packages')
-  .get(packageController.index)
+  .get(secureRoute, packageController.index)
   .post(secureRoute, packageController.create);
 
 router.route('/packages/:id')
-  .get(packageController.show)
-  .put(packageController.update)
-  .delete(packageController.delete);
+  .get(secureRoute, packageController.show)
+  .put(secureRoute, packageController.update)
+  .delete(secureRoute, packageController.delete);
 
 router.route('/register')
   .post(authenticationController.register);

@@ -16,7 +16,7 @@ function packagesCreate(req, res){
     if (err) return res.status(404).json({ message: err });
     User.findByIdAndUpdate(userId, { $push: { packages: package._id } }, function(err, user) {
       if (err) return res.status(404).json({ message: err });
-      return res.status(200).json({ package: package });
+      return res.status(200).json({package: package});
     });
   });
 }
