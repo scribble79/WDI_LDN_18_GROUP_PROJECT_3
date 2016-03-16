@@ -84,13 +84,49 @@ function createMarkers(packages){
 
     markers.push(marker);
 
+    console.log("Package contents from db:",package.contents);
+
+    // var infoWindow = new google.maps.InfoWindow({
+    //   position: position,
+    //   content: '<div class="info-window"><h3>' + "Content: " + package.contents + '</h3>'+
+    //   '<p>'+ package.note + '</p>' +
+    //   '<p>' + package.contact + '</p>' +
+    //   '</div>'
+    //
+    // });
+
+    console.log("Package contents from db:",package.contents);
+
+    var logos = "";
+
+    // Loop through package contents, find each icon and add to logos string
+    for(var i = 0; i < package.contents.length; i++){
+      var contents = package.contents[i];
+
+      switch(contents){
+        case "fruit and veg":
+        logos = logos + "<img src='/food-icons/png/fruit-1.png'>"
+        break;
+        case "meat and fish":
+        logos = logos + "<img src='/food-icons/png/food-1.png'>"
+        break;
+        case "dairy and eggs":
+        logos = logos + "<img src='/food-icons/png/food-6.png'>"
+        break;
+        case "baked goods":
+        logos = logos + "<img src='/food-icons/png/food-5.png'>"
+        break;
+        case "staples":
+        logos = logos + "<img src='/food-icons/png/food-7.png'>"
+        break;
+      }
+      console.log("logos", logos);
+    }
+
     var infoWindow = new google.maps.InfoWindow({
       position: position,
-      content: '<div class="info-window"><h3>' + "Content: " + package.contents + '</h3>'+
-      '<p>'+ package.note + '</p>' +
-      '<p>' + package.contact + '</p>' +
-      '</div>'
-
+        content: '<div class="info-window">' + logos + '<br>' + package.note + '</br>' +
+        '<br>' + package.contact + '</br></div>'
     });
 
       marker.addListener('click', function() {
@@ -118,12 +154,38 @@ function createMarker(package){
 
   markers.push(marker);
 
+  console.log("Package contents from db:",package.contents);
+
+  var logos = "";
+
+  // Loop through package contents, find each icon and add to logos string
+  for(var i = 0; i < package.contents.length; i++){
+    var contents = package.contents[i];
+
+    switch(contents){
+      case "fruit and veg":
+      logos = logos + "<img src='/food-icons/png/fruit-1.png'>"
+      break;
+      case "meat and fish":
+      logos = logos + "<img src='/food-icons/png/food-1.png'>"
+      break;
+      case "dairy and eggs":
+      logos = logos + "<img src='/food-icons/png/food-6.png'>"
+      break;
+      case "baked goods":
+      logos = logos + "<img src='/food-icons/png/food-5.png'>"
+      break;
+      case "staples":
+      logos = logos + "<img src='/food-icons/png/food-7.png'>"
+      break;
+    }
+    console.log("logos", logos);
+  }
+
   var infoWindow = new google.maps.InfoWindow({
     position: position,
-      content: '<div class="info-window"><h3>' + "Content: " + package.contents +
-      '</h3>'+ '<h4>'+ '<br>' + package.note + '</br>' +
-      '<br>' + package.contact + '</br>' +
-      '</h4></div>'
+      content: '<div class="info-window">' + logos + '<br>' + package.note + '</br>' +
+      '<br>' + package.contact + '</br></div>'
   });
 
     marker.addListener('click', function() {
