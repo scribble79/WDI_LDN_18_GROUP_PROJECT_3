@@ -10,7 +10,7 @@ function register(req, res) {
         var attribute = err.message.match(/\$([a-z]+)_/)[1];
         err = "An account with that " + attribute + " already exists";
       }
-      return res.status(400).json({ message: err.toString() });
+      return res.status(400).json({ message: "err.toString()" });
     }
 
     // TokenPayload restricts the user info sent to the token

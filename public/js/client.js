@@ -82,7 +82,7 @@ function createMarkers(packages){
 
     var infoWindow = new google.maps.InfoWindow({
       position: position,
-      content: '<div class="info-window"><h3>' + "Content: " + package.contents + '</h3>'+
+      content: '<div class="info-window"><h3>' + package.contents + '</h3>'+
       '<p>'+ package.note + '</p>' +
       '<p>' + package.contact + '</p>' + 
       '</div>'
@@ -114,7 +114,7 @@ function createMarker(package){
 
   var infoWindow = new google.maps.InfoWindow({
     position: position,
-      content: '<div class="info-window"><h3>' + "Content: " + package.contents + 
+      content: '<div class="info-window"><h3>' + package.contents + 
       '</h3>'+ '<h4>'+ '<br>' + package.note + '</br>' +
       '<br>' + package.contact + '</br>' + 
       '</h4></div>'
@@ -275,7 +275,15 @@ function submitPackageForm(){
 
 
       var $contents = $("option[value='"+$contentsValue+"']").attr("data-img-src");
+
+      $contents.forEach(function(content){
+        console.log(content);
+      });
+      
+      var logos = "";
+
       var logo = "<img src='"+$contents+"'>";
+
       console.log($contents);
 
 
@@ -375,7 +383,8 @@ function ajaxRequest(method, url, data, callback) {
         }
       })
       .done(callback)
-      .fail(function(){
+      .fail(function(err){
+        displayErrors(err);
       });
   }
 
@@ -488,4 +497,19 @@ function showEditForm(){
   $('.menuContainer').hide();
   $('.userEditForm').show();
   $('.navbarButton').show();
+}
+
+ function displayErrors(data){
+  console.log("errors are displaying");
+  console.log('.alert'); 
+  $('.alert').removeClass("hidden");
+  $('.alert').append(data.statusText);
+}
+
+function hideErrors(){
+  console.log("errors are hidden");
+  // remove the errors from the alert and hide it
+  $('.alert').addClass("hidden");
+  // empty removes all of the html. 
+  $('.alert').empty();
 }
