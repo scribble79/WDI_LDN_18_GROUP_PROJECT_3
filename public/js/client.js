@@ -12,6 +12,9 @@ $(function(){
   $('.userEditLink').on('click', showEditForm);
   $('.manageDonationLink').on('click', showManagePackages);
 
+  // Adding event listener to back button
+  $('.backButton').on('click', loggedInState);
+
   // Add event listener to links
   $(".linkToRegister").click(function(){
     $('.loginForm').addClass('hidden');
@@ -73,7 +76,10 @@ function createMarkers(packages){
 
     var infoWindow = new google.maps.InfoWindow({
       position: position,
-      content: package.contents[0],
+      content: '<div class="info-window"><h3>' + "Content: " + package.contents + '</h3>'+
+      '<p>'+ package.note + '</p>' +
+      '<p>' + package.contact + '</p>' + 
+      '</div>'
 
     });
 
@@ -102,8 +108,10 @@ function createMarker(package){
 
   var infoWindow = new google.maps.InfoWindow({
     position: position,
-    content: package.contents[0],
-
+      content: '<div class="info-window"><h3>' + "Content: " + package.contents + 
+      '</h3>'+ '<h4>'+ '<br>' + package.note + '</br>' +
+      '<br>' + package.contact + '</br>' + 
+      '</h4></div>'
   });
 
     marker.addListener('click', function() {
@@ -113,6 +121,7 @@ function createMarker(package){
         infoWindow.open(map, marker);
       });
 }
+
 
 ////// AUTHENTICATIONS REQUEST ////////
 
@@ -278,11 +287,11 @@ function submitPackageForm(){
 
 function loggedInState(){
   $('.loginContainer').hide();
-  $('.formContainer').show();
   $('.backButton').hide();
   $('.packageForm').hide();
-
-
+  $('.userEditForm').hide();
+  $('.formContainer').show();
+  $('.menuContainer').show();
   // Test edit form population functionality
   populateEditForm();
 
@@ -370,9 +379,11 @@ function showCreatePackage() {
 function showManagePackages(){
   $('.menuContainer').hide();
   $('.userEditForm').hide();
+  $('.navbarButton').show();
 }
 
 function showEditForm(){
   $('.menuContainer').hide();
   $('.userEditForm').show();
+  $('.navbarButton').show();
 }
