@@ -26,7 +26,7 @@ router.route('/packages')
 
 router.route('/packages/:id')
   .get(packageController.show)
-  .put(packageController.update)
+  .patch(packageController.update)
   .delete(packageController.delete);
 
 router.route('/register')
@@ -45,6 +45,9 @@ router.route('/users')
 router.route('/users/:id')
   .get(userController.show)
   .put(userController.update);
+
+router.route('/userPackages')
+  .post(userController.showPackages)
 
 router.post('/login', authenticationController.login);
 router.post('/register', authenticationController.register);

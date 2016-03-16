@@ -1,9 +1,9 @@
-<div class="packageForm">
+<div>
 
-  <form class="editPackageForm" action="/packages/edit" method="post">
+  <form class="editPackageForm hidden" action="/packages/edit" method="post">
 
 
-  <select multiple="multiple" name="webmenu" id="webmenu" class="packageContent">
+  <select multiple="multiple" name="webmenu" id="webmenu" class="editPackageContent">
     <option value="fruit and veg" data-image="icons/icon_calendar.gif">Fruit and veg</option>
     <option value="meat and fish" data-image="icons/icon_cart.gif">Meat and fish</option>
     <option value="dairy and eggs" data-image="icons/icon_cd.gif">Dairy and eggs</option>
@@ -11,9 +11,14 @@
     <option value="Staples" data-image="icons/icon_games.gif">Staples</option>
   </select>
 
-  <input type="textarea" name="package[note]" placeholder="Notes" class="packageNote">
-  <input type="text" name="package[contact]" placeholder="Contact details" class="package[contact]">
-  <input type="text" class="editPackagePostcode" placeholder="Package Postcode">
-  <button type="submit">Update the package</button>
+  <textarea class="editPackageNote" rows="8"></textarea>
 
-</form>
+  <button type="submit">Update Package</button>
+
+  <input type="hidden" class="editPackageId" name="name" placeholder="Package ID">
+
+  </form>
+
+  <button type="button" class="deletePackageButton hidden">Archive Package</button>
+
+</div>

@@ -6,11 +6,13 @@ $(function(){
   $('.logoutbtn').on('click', logout);
   $('.registerForm').on('submit', submitLoginRegisterForm);
   $('.userLocationForm').on('submit', submitLocationForm);
+  $('.editPackageForm').on('submit', updatePackage)
   $('.package-link').on('click', showCreatePackage);
   $('.createPackageForm').on('submit', submitPackageForm);
   $('.userEditForm').on('submit', submitEditForm);
   $('.userEditLink').on('click', showEditForm);
-  $('.manageDonationLink').on('click', showManagePackages);
+  $('.manageDonationsLink').on('click', showManagePackages);
+  $('.deletePackageButton').on('click', deletePackage);
 
   // Adding event listener to back button
   $('.backButton').on('click', loggedInState);
@@ -48,6 +50,7 @@ var currentInfoWindow;
 
 function initialMenuState(){
   $('.userEditForm').addClass('hidden');
+  $('.user-packages').addClass('hidden');
 }
 
 function createMap(lat, lng, zoom){
@@ -380,8 +383,96 @@ function showManagePackages(){
   $('.menuContainer').hide();
   $('.userEditForm').hide();
   $('.navbarButton').show();
+  $('.user-packages').removeClass('hidden');
+
+  // Get user id
+  var user = currentUser();
+
+  // Populate user-packages
+  ajaxRequest("POST", "http://localhost:3000/api/userPackages", user, populatePackages);
 }
 
+function populatePackages(data) {
+  data.packages.forEach(function(package){
+    $('.user-packages').append("<button name='" + package.lat +","+ package.lng + "' class='packageEditButton' id='" + package._id + "'>" + package.contents + "</button>");
+  });
+  addEventListenersToPackages();
+}
+
+function addEventListenersToPackages(){
+  var packageEditButtons = $('.packageEditButton');
+
+  for(var i = 0; i < packageEditButtons.length; i++) {
+    packageEditButtons[i].addEventListener('click', function(){
+      console.log(this.id);
+      populatePackageEditForm(this.id);
+
+      console.log("Clicked package position: " + this.name.split(',')[0]);
+
+      var position = { lat: parseFloat(this.name.split(',')[0]), lng: parseFloat(this.name.split(',')[1])}
+
+      // Pan map to marker
+      map.panTo(position);
+      map.setZoom(15);
+
+      // Handle view hiding/showing
+      $('.editPackageForm').removeClass('hidden');
+      $('.deletePackageButton').removeClass('hidden');
+      $("#" + this.id).addClass('hidden');
+    });
+  }
+}
+
+function populatePackageEditForm(packageId){
+  var method = 'GET';
+  var url = "http://localhost:3000/api/packages/" + packageId;
+
+  ajaxRequest(method, url, null, function(data) {
+    var package = data.package;
+    console.log("POPULATE PACKAGE EDIT DATA: " + data.package.contents);
+    $('.editPackageNote').empty();
+    $('.editPackageNote').html(package.note);
+    $('.editPackageContent').val(package.contents);
+    $('.editPackageId').val(package._id);
+  });
+}
+
+function updatePackage(){
+
+  event.preventDefault();
+
+  var user = currentUser();
+  var packageId = $('.editPackageId').val();
+
+  var package = {
+    user: user,
+    contents: $('.editPackageContent').val(),
+    note: $('.editPackageNote').val(),
+    contact: $('.packageContact').val()
+  }
+
+  var method = "patch";
+  var url = "http://localhost:3000/api/packages/" + packageId;
+
+  ajaxRequest(method, url, package, function(data){
+    console.log("UPDATED PACKAGE");
+  });
+
+  // Refresh markers
+  ajaxRequest("get", "http://localhost:3000/api/packages", null, createMarkers);
+}
+
+function deletePackage(){
+  var packageId = $('.editPackageId').val();
+  var method = "delete";
+  var url = "http://localhost:3000/api/packages/" + packageId;
+
+  ajaxRequest(method, url, null, refreshMarkers)
+}
+
+function refreshMarkers(){
+  ajaxRequest("get", "http://localhost:3000/api/packages", null, createMarkers);
+}
 function showEditForm(){
   $('.menuContainer').hide();
   $('.userEditForm').show();

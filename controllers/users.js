@@ -15,7 +15,17 @@ function usersUpdate(req, res) {
   });
 }
 
+function showUserPackages(req, res) {
+  var id = req.body._id;
+  console.log("USER ID: " + id);
+  User.findOne({ _id: id}).populate('packages').exec(function(err, packages){
+    if (err) return res.status(404).json({ message: err });
+    return res.status(200).json(packages);
+  });
+}
+
 module.exports = {
   show: usersShow,
-  update: usersUpdate
+  update: usersUpdate,
+  showPackages: showUserPackages
 }
