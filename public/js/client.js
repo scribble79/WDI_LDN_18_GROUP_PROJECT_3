@@ -381,7 +381,11 @@ function showManagePackages(){
 }
 
 function populatePackages(data) {
-  console.log("User's packages: " + data.packages.length);
+  // console.log("User's packages: " + data.packages.length);
+  data.packages.forEach(function(package){
+    // console.log(package.contents);
+    $('.user-packages').append("<button class='" + package._id + "'>" + package.contents + "</button>");
+  });
 }
 
 function showEditForm(){
