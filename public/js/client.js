@@ -541,7 +541,7 @@ function updatePackage(){
   var user = currentUser();
   var packageId = $('.editPackageId').val();
 
-  console.log("Collection time from update form: ", $('.editPackageContact').val());
+  console.log("Collection time from update form: ", $('.editPreferredTime').val());
 
 
   var data = 
@@ -551,6 +551,7 @@ function updatePackage(){
       contents: $('.editPackageContent').val(),
       note: $('.editPackageNote').val(),
       contact: $('.editPackageContact').val(),
+      collection_time: $('.editPreferredTime').val()
       }
     }
 
