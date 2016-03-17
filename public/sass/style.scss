@@ -78,13 +78,15 @@ textarea{
   margin-left: 37vw;
   width: 300px;
   /*height: 200px;*/
-  background: white;
-  border-radius: 10px;
+  background: rgba(255,255,255,0.8);
+  border-radius: 5px;
   text-align: center;
-  border: 1px solid blue;
+  // border: 1px solid blue;
 }
 
-
+.loginbutton {
+  width: 290px;
+}
 
 //  .logoutContainer {
 //   position: absolute;

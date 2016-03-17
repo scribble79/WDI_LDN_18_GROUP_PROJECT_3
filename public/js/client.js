@@ -1,6 +1,9 @@
 $(function(){
   console.log("Jake Weary at your service");
 
+  // $('.info-window').parent().css({"background-color": "red !important"})
+  // console.log($('.info-window').parent().parent().parent().parent())
+
   // Add event listeners to forms
   $('.loginForm').on('submit', submitLoginRegisterForm);
   $('.logoutbtn').on('click', logout);
@@ -96,19 +99,19 @@ function createMarkers(packages){
 
       switch(contents){
         case "fruit and veg":
-        logos = logos + "<img src='/food-icons/png/fruit-1.png'>"
+        logos = logos + "<img class='logo' src='/food-icons/png/fruit-1.png'>"
         break;
         case "meat and fish":
-        logos = logos + "<img src='/food-icons/png/food-1.png'>"
+        logos = logos + "<img class='logo' src='/food-icons/png/food-1.png'>"
         break;
         case "dairy and eggs":
-        logos = logos + "<img src='/food-icons/png/food-6.png'>"
+        logos = logos + "<img class='logo' src='/food-icons/png/food-6.png'>"
         break;
         case "baked goods":
-        logos = logos + "<img src='/food-icons/png/food-5.png'>"
+        logos = logos + "<img class='logo' src='/food-icons/png/food-5.png'>"
         break;
         case "staples":
-        logos = logos + "<img src='/food-icons/png/food-7.png'>"
+        logos = logos + "<img class='logo' src='/food-icons/png/food-7.png'>"
         break;
       }
       console.log("logos", logos);
@@ -116,17 +119,29 @@ function createMarkers(packages){
 
     var infoWindow = new google.maps.InfoWindow({
       position: position,
-        content: '<div class="info-window">' + logos + '<br>'+ package.collection_time + '<br>' + package.note + '</br>' +
-        '<br>' + package.contact + '</br></div>'
-
+        content: '<div class="infoWindow">' + "<div class='infoWindowTopBar'>" + logos + "</div><br><strong>Collection Time:   </strong>"+ package.collection_time + '<br><strong>Notes:   </strong>' + package.note + '</br>' +
+        '<br><strong>Contact Details:   </strong>' + package.contact + '</br></div>'
     });
 
-      marker.addListener('click', function() {
-        if(currentInfoWindow) currentInfoWindow.close();
-          currentInfoWindow = infoWindow;
-          infoWindow.open(map, marker);
-        });
+    marker.addListener('click', function() {
+      if(currentInfoWindow) currentInfoWindow.close();
+        currentInfoWindow = infoWindow;
+        infoWindow.open(map, marker);
+        // Log infowindow containers
+        removeInfoWindowBg();
+      });
     });
+}
+
+function removeInfoWindowBg(){
+  var $iwOuter = $('.gm-style-iw');
+
+  console.log($iwOuter);
+  console.log($iwOuter.length);
+
+  $iwOuter.prev().children(':nth-child(2n)').hide();
+
+
 }
 
 function createMarker(package){
@@ -339,7 +354,7 @@ function submitPackageForm(){
         collection_time: $('.preferredTime').val(),
         lat: lat,
         lng: lng
-        } 
+        }
       }
 
       // var package = {
@@ -554,7 +569,7 @@ function updatePackage(){
   console.log("Collection time from update form: ", $('.editPreferredTime').val());
 
 
-  var data = 
+  var data =
     {
       package: {
       user: user,
