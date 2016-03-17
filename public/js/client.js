@@ -527,7 +527,7 @@ function populatePackageEditForm(packageId){
     var package = data.package;
     console.log("PACKAGE: "+ package.note)
     console.log("POPULATE PACKAGE EDIT DATA: ", package.contact);
-    $('.editPackageNote').html('');
+    $('.editPackageNote').empty();
     $('.editPackageNote').html(package.note);
     $('.editPackageContent').val(package.contents);
     $('.editPackageContact').val(package.contact);
