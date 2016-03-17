@@ -2,7 +2,8 @@
 
   <form class="editPackageForm hidden" action="/packages/edit" method="post">
 
-    <select multiple="multiple" name="webmenu" id="webmenu" class="image-picker show-html editPackageContent">
+
+    <select multiple="multiple" name="webmenu" id="webmenu1" class="image-picker show-html editPackageContent">
       <option data-img-src="/food-icons/png/fruit-1.png" value="fruit and veg">Fruit and Veg</option>
       <option data-img-src="/food-icons/png/food-1.png" value="meat and fish">Meat and Fish</option>
       <option data-img-src="/food-icons/png/food-6.png" value="dairy and eggs">Dairy and Eggs</option>
@@ -12,12 +13,14 @@
 
     <label for="editPreferredTime">Preferred collection time</label>
     <select multiple="multiple" class="editPreferredTime">
-      <option value="morning">Morning</option>
-      <option value="afternoon">Afternoon</option>
-      <option value="evening">Evening</option>
+      <option value="Morning">Morning</option>
+      <option value="Afternoon">Afternoon</option>
+      <option value="Evening">Evening</option>
     </select>
 
   <textarea class="editPackageNote" rows="8"></textarea>
+  <input type="text" placeholder="Contact Details" class="editPackageContact">
+
 
   <button type="submit">Update Package</button>
 

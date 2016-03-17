@@ -6,12 +6,12 @@ $(function(){
   $('.logoutbtn').on('click', logout);
   $('.registerForm').on('submit', submitLoginRegisterForm);
   $('.userLocationForm').on('submit', submitLocationForm);
-  $('.editPackageForm').on('submit', updatePackage);
+  $('.editPackageForm').on('submit', updatePackage)
   $('.package-link').on('click', showCreatePackage);
   $('.createPackageForm').on('submit', submitPackageForm);
   $('.userEditForm').on('submit', submitEditForm);
   $('.userEditLink').on('click', showEditForm);
-  $('.manageDonationLink').on('click', showManagePackages);
+  $('.manageDonationsLink').on('click', showManagePackages);
   $('.deletePackageButton').on('click', deletePackage);
 
   // Adding event listener to back button
@@ -67,7 +67,7 @@ function createMap(lat, lng, zoom){
 }
 
 function createMarkers(packages){
-  console.log("DATA FROM GET MARKERS AJAX REQUEST: " + packages);
+  console.log("DATA FROM GET MARKERS AJAX REQUEST: ",packages);
   removeAllMarkers();
 
   packages.forEach(function(package){
@@ -83,17 +83,42 @@ function createMarkers(packages){
 
     markers.push(marker);
 
+    console.log("Package contents from db:",package.contents);
+
+    var logos = "";
+
+    // Loop through package contents, find each icon and add to logos string
+    for(var i = 0; i < package.contents.length; i++){
+      var contents = package.contents[i];
+
+      switch(contents){
+        case "fruit and veg":
+        logos = logos + "<img src='/food-icons/png/fruit-1.png'>"
+        break;
+        case "meat and fish":
+        logos = logos + "<img src='/food-icons/png/food-1.png'>"
+        break;
+        case "dairy and eggs":
+        logos = logos + "<img src='/food-icons/png/food-6.png'>"
+        break;
+        case "baked goods":
+        logos = logos + "<img src='/food-icons/png/food-5.png'>"
+        break;
+        case "staples":
+        logos = logos + "<img src='/food-icons/png/food-7.png'>"
+        break;
+      }
+      console.log("logos", logos);
+    }
+
     var infoWindow = new google.maps.InfoWindow({
-          position: position,
-          content: '<div class="info-window"><h3>' + "Content: " + package.contents + '</h3>'+
-          '<p>'+ package.note + '</p>' +
-          '<p>' + package.contact + '</p>' +
-          '</div>'
+      position: position,
+        content: '<div class="info-window">' + logos + '<br>'+ package.collection_time + '<br>' + package.note + '</br>' +
+        '<br>' + package.contact + '</br></div>'
 
     });
 
       marker.addListener('click', function() {
-      // console.log('Clicked marker');
         if(currentInfoWindow) currentInfoWindow.close();
           currentInfoWindow = infoWindow;
           infoWindow.open(map, marker);
@@ -117,13 +142,39 @@ function createMarker(package){
 
   markers.push(marker);
 
-    var infoWindow = new google.maps.InfoWindow({
-      position: position,
-        content: '<div class="info-window"><h3>' + "Content: " + package.contents +
-        '</h3>'+ '<h4>'+ '<br>' + package.note + '</br>' +
-        '<br>' + package.contact + '</br>' +
-        '</h4></div>'
-    });
+  console.log("Package contents from db:",package.contents);
+
+  var logos = "";
+
+  // Loop through package contents, find each icon and add to logos string
+  for(var i = 0; i < package.contents.length; i++){
+    var contents = package.contents[i];
+
+    switch(contents){
+      case "fruit and veg":
+      logos = logos + "<img src='/food-icons/png/fruit-1.png'>"
+      break;
+      case "meat and fish":
+      logos = logos + "<img src='/food-icons/png/food-1.png'>"
+      break;
+      case "dairy and eggs":
+      logos = logos + "<img src='/food-icons/png/food-6.png'>"
+      break;
+      case "baked goods":
+      logos = logos + "<img src='/food-icons/png/food-5.png'>"
+      break;
+      case "staples":
+      logos = logos + "<img src='/food-icons/png/food-7.png'>"
+      break;
+    }
+    console.log("logos", logos);
+  }
+
+  var infoWindow = new google.maps.InfoWindow({
+    position: position,
+      content: '<div class="info-window">' + logos + '<br>' + package.note + '</br>' +
+      '<br>' + package.contact + '</br></div>'
+  });
 
     marker.addListener('click', function() {
     // console.log('Clicked marker');
@@ -132,6 +183,7 @@ function createMarker(package){
         infoWindow.open(map, marker);
       });
 }
+
 
 ////// AUTHENTICATIONS REQUEST ////////
 
@@ -166,7 +218,7 @@ function submitLoginRegisterForm(){
   // console.log(form);
 
   var method = $(this).attr('method'); // attribute to the form the right method
- var url = "/api" + $(this).attr('action'); //post to this url and do this action
+  var url = "/api" + $(this).attr('action'); //post to this url and do this action
   var data = $(this).serialize(); // we don't use json because we have put url encoded in our app.js // the data sort like name=Mike&email=mike.hayden@ga.co
 
   ajaxRequest(method, url, data, authenticationSuccessful);
@@ -220,6 +272,7 @@ function submitLocationForm(){
 function populateEditForm(){
   // event.preventDefault();
   // if(getToken()) {
+  $("#webmenu1").imagepicker();
 
     var method = 'GET';
     var user = currentUser();
@@ -235,7 +288,6 @@ function populateEditForm(){
   // else {
   //   console.log("No token found, not populating edit form");
   // }
-
 }
 
 function submitEditForm(){
@@ -249,7 +301,8 @@ function submitEditForm(){
 
   this.reset();
   ajaxRequest(method, url, data, loggedInState);
-  }
+}
+
 
 function submitPackageForm(){
 
@@ -279,6 +332,7 @@ function submitPackageForm(){
         contents: $form.find('select.image-picker').val(),
         note: $('.packageNote').val(),
         contact: $('.packageContact').val(),
+        collection_time: $('.preferredTime').val(),
         lat: lat,
         lng: lng
         } 
@@ -317,7 +371,6 @@ function removeAllMarkers(){
   markers = [];
 }
 
-
 function loggedInState(){
   $('.loginContainer').hide();
   $('.backButton').hide();
@@ -330,10 +383,8 @@ function loggedInState(){
   $('.editPackageForm').hide();
   $('.deletePackageButton').addClass('hidden');
 
-
   // Test edit form population functionality
   populateEditForm();
-
 
     // Make request for markers from DB
   ajaxRequest("get", "/api/packages", null, createMarkers);
@@ -389,18 +440,18 @@ function getToken() {
 
 function ajaxRequest(method, url, data, callback) {
     // create a re-useable ajaxRequest function
-      return $.ajax({
-        method: method,
-        url: url,
-        data: data,
-        beforeSend: function(jqXHR, settings) {
-          var token = getToken();
-          if(token) return jqXHR.setRequestHeader('Authorization', 'Bearer ' + token);
-        }
-      })
-      .done(callback)
-      .fail(function(){
-      });
+    return $.ajax({
+      method: method,
+      url: url,
+      data: data,
+      beforeSend: function(jqXHR, settings) {
+        var token = getToken();
+        if(token) return jqXHR.setRequestHeader('Authorization', 'Bearer ' + token);
+      }
+    })
+    .done(callback)
+    .fail(function(){
+    });
   }
 
 function removeToken() {
@@ -427,58 +478,60 @@ function showManagePackages(){
 
   // Populate user-packages
   ajaxRequest("POST", "/api/userPackages", user, populatePackages);
-  }
+}
 
 function populatePackages(data) {
-    $('.user-packages').empty();
-    console.log(data.packages);
-    data.packages.forEach(function(package){
-      console.log("PACKAGE CONTENTS: " + package.contents);
-      $('.user-packages').append("<button name='" + package.lat +","+ package.lng + "' class='packageEditButton' id='" + package._id + "'>" + package.contents + "</button>");
-    });
-    addEventListenersToPackages();
-  }
+  $('.user-packages').empty();
+  console.log(data.packages);
+  data.packages.forEach(function(package){
+    console.log("PACKAGE CONTENTS: " + package.contents);
+    $('.user-packages').append("<button name='" + package.lat +","+ package.lng + "' class='packageEditButton' id='" + package._id + "'>" + package.contents + "</button>");
+  });
+  addEventListenersToPackages();
+}
 
 function addEventListenersToPackages(){
   var packageEditButtons = $('.packageEditButton');
 
-    for(var i = 0; i < packageEditButtons.length; i++) {
-      packageEditButtons[i].addEventListener('click', function(){
-        console.log(this.id);
-        populatePackageEditForm(this.id);
+  for(var i = 0; i < packageEditButtons.length; i++) {
+    packageEditButtons[i].addEventListener('click', function(){
+      console.log(this.id);
+      populatePackageEditForm(this.id);
 
-        console.log("Clicked package position: " + this.name.split(',')[0]);
+      console.log("Clicked package position: " + this.name.split(',')[0]);
 
-        var position = { lat: parseFloat(this.name.split(',')[0]), lng: parseFloat(this.name.split(',')[1])}
+      var position = { lat: parseFloat(this.name.split(',')[0]), lng: parseFloat(this.name.split(',')[1])}
 
-        // Pan map to marker
-        map.panTo(position);
-        map.setZoom(15);
+      // Pan map to marker
+      map.panTo(position);
+      map.setZoom(15);
 
-        // Hide all other edit buttons on click
-         $('.packageEditButton').not('#' + this.id).hide();
+      // Hide all other edit buttons on click
+       $('.packageEditButton').not('#' + this.id).hide();
 
-        // Handle view hiding/showing
-        $('.editPackageForm').removeClass('hidden');
-        $('.editPackageForm').show();
-        $('.deletePackageButton').removeClass('hidden');
-        $("#" + this.id).addClass('hidden');
+      // Handle view hiding/showing
+      $('.editPackageForm').removeClass('hidden');
+      $('.editPackageForm').show();
+      $('.deletePackageButton').removeClass('hidden');
+      $("#" + this.id).addClass('hidden');
     });
   }
 }
 
 function populatePackageEditForm(packageId){
-    var method = 'GET';
-    var url = "/api/packages/" + packageId;
 
-    ajaxRequest(method, url, null, function(data) {
-      var package = data.package;
-      console.log("POPULATE PACKAGE EDIT DATA: ",data.package.note);
-      $('.editPackageNote').empty();
-      $('.editPackageNote').html(package.note);
-      $('.editPackageContent').val(package.contents);
-      $('.editPackageId').val(package._id);
-    });
+  var method = 'GET';
+  var url = "/api/packages/" + packageId;
+
+  ajaxRequest(method, url, null, function(data) {
+    var package = data.package;
+    console.log("POPULATE PACKAGE EDIT DATA: ", package.contact);
+    $('.editPackageNote').empty();
+    $('.editPackageNote').html(package.note);
+    $('.editPackageContent').val(package.contents);
+    $('.editPackageContact').val(package.contact);
+    $('.editPackageId').val(package._id);
+  });
 }
 
 function updatePackage(){
@@ -488,20 +541,25 @@ function updatePackage(){
   var user = currentUser();
   var packageId = $('.editPackageId').val();
 
+  console.log("Collection time from update form: ", $('.editPackageContact').val());
+
+
   var data = 
     {
       package: {
       user: user,
       contents: $('.editPackageContent').val(),
       note: $('.editPackageNote').val(),
-      contact: $('.packageContact').val()
+      contact: $('.editPackageContact').val(),
       }
     }
+
 
   var method = "patch";
   var url = "/api/packages/" + packageId;
 
   ajaxRequest(method, url, data, function(){
+
     ajaxRequest("get", "/api/packages", null, createMarkers);
   });
 

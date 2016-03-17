@@ -33,23 +33,38 @@ User.create([{
   else console.log(users);
 
   Package.create([{
-    contents: ['Potatoes', 'Roule'],
+    contents: ['meat and fish'],
+    note: ['Chicken'],
+    contact: ['077346578'],
+    collection_time: ['monday, 2pm'],
     lat: 51.5132,
     lng: 0.0777
   },{
-    contents: ['Cheese', 'Ham'],
+    contents: ['fruit and veg'],
+    note: ['Apples'],
+    contact: ['me@me.com'],
+    collection_time: ['tuesday afternoon'],
     lat: 51.5081,
     lng: -0.1281
   },{
-    contents: ['Tinned Tomatoes'],
+    contents: ['dairy and eggs'],
+    note: ['Cheese'],
+    contact: ['0207 436 7755'],
+    collection_time: ['wednesday 4pm'],
     lat: 51.4839,
     lng: -0.0664
   },{
-    contents: ['Pizza'],
+    contents: ['baked goods'],
+    note: ['Bread'],
+    contact: ['bob@bob.com'],
+    collection_time: ['monday morning'],
     lat: 51.4999,
     lng: -0.1621
   },{
-    contents: ['Cereal', 'Eggs'],
+    contents: ['staples'],
+    note: ['Cereal'],
+    contact: ['07767532851'],
+    collection_time: ['friday evening'],
     lat: 51.5768,
     lng: 0.1801
   }], function(err, packages){

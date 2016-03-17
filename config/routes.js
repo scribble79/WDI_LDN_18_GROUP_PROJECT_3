@@ -47,8 +47,8 @@ router.route('/users/:id')
   .put(userController.update);
 
 router.route('/userPackages')
-  .post(userController.showPackages)  
-
+  .post(userController.showPackages)
+  
 router.post('/login', authenticationController.login);
 router.post('/register', authenticationController.register);
 

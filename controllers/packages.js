@@ -29,10 +29,12 @@ function packagesShow(req, res) {
 }
 
 function packagesUpdate(req, res) {
+
   console.log("******UPDATE PACKAGE DATA: ", req.body);
   console.log("******ID OF PACKAGE TO UPDATE: ", req.params.id);
   Package.findByIdAndUpdate(req.params.id, req.body.package, {new:true}, function(err, package){
     if (err) return res.status(404).json({ message: err });
+    console.log("UPDATED PACKAGE: " + package);
     return res.status(200).json({package: package});
   });
 }
