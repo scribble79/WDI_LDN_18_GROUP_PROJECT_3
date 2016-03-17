@@ -144,3 +144,36 @@ button {
   font-size: 28px;
 
 }
+
+@font-face {
+    font-family: another shabby;
+    src: url(http://www.1001fonts.com/another-shabby-font.html);
+    font-weight:400;
+}
+
+h1 {
+  z-index: 3;
+  font-family: another shabby;
+  font-size: 100px;
+  text-align: center;
+}
+
+p {
+  z-index: 3;
+  text-align: center;
+  font-size: 18px;
+}
+
+.logo {
+  z-index: 3;
+  background-color: rgba(255, 255, 255, 0.7);
+  bottom: 120px;
+  position: absolute;
+  border-radius: 10px;
+  text-align: center;
+  border: 1px solid blue;
+  padding: 15px;
+  width: 500px;
+  height: auto;
+  margin-left: 580px;
+}
