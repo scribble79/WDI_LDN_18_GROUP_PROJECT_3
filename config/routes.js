@@ -1,7 +1,7 @@
 var router = require('express').Router();
 var jwt = require('jsonwebtoken');
 
-// var secret = require('/tokens').secret;
+var secret = require('./tokens').secret;
 
 var packageController = require('../controllers/packages');
 var authenticationController = require('../controllers/authentications');
@@ -21,13 +21,13 @@ function secureRoute(req, res, next) {
 
 // ROUTES FOR SERVING DATA FOR THE API
 router.route('/packages')
-  .get(packageController.index)
-  .post(packageController.create);
+  .get(secureRoute, packageController.index)
+  .post(secureRoute, packageController.create);
 
 router.route('/packages/:id')
-  .get(packageController.show)
-  .patch(packageController.update)
-  .delete(packageController.delete);
+  .get(secureRoute, packageController.show)
+  .patch(secureRoute, packageController.update)
+  .delete(secureRoute, packageController.delete);
 
 router.route('/register')
   .post(authenticationController.register);
@@ -48,7 +48,7 @@ router.route('/users/:id')
 
 router.route('/userPackages')
   .post(userController.showPackages)
-
+  
 router.post('/login', authenticationController.login);
 router.post('/register', authenticationController.register);
 
