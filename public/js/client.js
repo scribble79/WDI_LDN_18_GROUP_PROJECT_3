@@ -348,7 +348,8 @@ function createMarkers(packages){
     var marker = new google.maps.Marker({
       position: position,
       map: map,
-      animation: google.maps.Animation.DROP
+      animation: google.maps.Animation.DROP,
+      icon: '/markers/groceries.png'
     });
 
     markers.push(marker);
@@ -419,7 +420,8 @@ function createMarker(package){
   var marker = new google.maps.Marker({
     position: position,
     map: map,
-    animation: google.maps.Animation.DROP
+    animation: google.maps.Animation.DROP,
+    icon: '/markers/groceries.png'
   });
 
   markers.push(marker);
@@ -871,6 +873,7 @@ function deletePackage(){
 function showEditForm(){
   $('.menuContainer').hide();
   $('.userEditForm').show();
+  $('.userEditForm').removeClass('hidden');
   $('.navbarButton').show();
 }
 
