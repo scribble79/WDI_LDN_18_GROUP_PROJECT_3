@@ -775,9 +775,17 @@ function showManagePackages(){
 function populatePackages(data) {
   $('.user-packages').empty();
   console.log(data.packages);
+
   data.packages.forEach(function(package){
-    console.log("PACKAGE CONTENTS: " + package.contents);
-    $('.user-packages').append("<button name='" + package.lat +","+ package.lng + "' class='packageEditButton' id='" + package._id + "'>" + package.contents + "</button>");
+
+    var packageContents = package.contents.join(',');
+
+    if(packageContents.length > 33) {
+      packageContents = packageContents.substring(0,30) + "...";
+    }
+
+    // console.log("PACKAGE CONTENTS: " + package.contents);
+    $('.user-packages').append("<button name='" + package.lat +","+ package.lng + "' class='packageEditButton' id='" + package._id + "'>" + packageContents + "</button>");
   });
   addEventListenersToPackages();
 }
