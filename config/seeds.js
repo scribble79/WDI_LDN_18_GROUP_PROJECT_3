@@ -61,12 +61,89 @@ User.create([{
     lat: 51.4999,
     lng: -0.1621
   },{
+    contents:['fruit and veg'], 
+    note: ['Couple of oranges'],
+    contact: ['07123456789'],
+    collection_time: ['Any-time Tuesday'],
+    lat: 51.4966,
+    lng: -0.1448
+  },{
+    contents:['meat and fish', 'baked goods'], 
+    note: ['Steak pie and a box of cornflakes'],
+    contact: ['dave@gmail.com'],
+    collection_time: ['Any-time Tuesday'],
+    lat: 51.4970,
+    lng: -0.1450
+  },{
+    contents: ['meat and fish'],
+    note: ['couple of rainbow trout'],
+    contact: ['bill@portland.co.uk'],
+    collection_time: ['today, 5am - 8am'],
+    lat: 51.5244,
+    lng: -0.0766
+  },{
+    contents:['meat and fish'], 
+    note: ['Chicken curry'],
+    contact: ['0207 352 4403'],
+    collection_time: ['Any-time Tuesday'],
+    lat: 51.4961,
+    lng: -0.1443
+  },{
+    contents:['staples'], 
+    note: ['4 tins of beans'],
+    contact: ['0777777743'],
+    collection_time: ['before 9am on Monday'],
+    lat: 51.5005,
+    lng: 0.1422
+  },{
+    contents:['fruit and veg', 'eggs and dairy'], 
+    note: ['strawberries and cream'],
+    contact: ['jane@spitalfields.com'],
+    collection_time: ['Saturday at latest'],
+    lat: 51.5260,
+    lng: -0.0780
+  },{
+    contents:['meat and fish'], 
+    note: ['Chicken curry'],
+    contact: ['0207 352 4403'],
+    collection_time: ['Any-time Tuesday'],
+    lat: 51.4961,
+    lng: -0.1443
+  },{
+    contents: ['dairy and eggs'],
+    note: ['Couple of pints of semi-skimmed'],
+    contact: ['0207 336 6422'],
+    collection_time: ['Thursday, 8-4'],
+    lat: 51.5199,
+    lng: -0.0801
+  },{
+    contents: ['meat and fish'],
+    note: ['sausages'],
+    contact: ['herman@hotmail.com'],
+    collection_time: ['Sunday to Wednesday, pm'],
+    lat: 51.5010,
+    lng: -0.1416
+  },{
+    contents: ['baked goods'],
+    note: ['Loaf of soda bread'],
+    contact: ['julie@gmail.com'],
+    collection_time: ['Anytime, but goes off Friday'],
+    lat: 51.5212,
+    lng: -0.0744
+  },{
+    contents: ['meat and fish'],
+    note: ['porkpie'],
+    contact: ['desmond@mail.com'],
+    collection_time: ['Tuesday evening'],
+    lat: 51.5233,
+    lng: -0.0744
+  },{
     contents: ['staples'],
     note: ['Cereal'],
     contact: ['07767532851'],
     collection_time: ['friday evening'],
     lat: 51.5768,
-    lng: 0.1801
+    lng: -0.1801
   }], function(err, packages){
     if(err) console.error(err);
     else console.log(packages);
