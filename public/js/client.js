@@ -23,6 +23,7 @@ $(function(){
     $('.registerForm').removeClass('hidden');
     $(this).addClass('hidden');
     $('.linkToLogin').removeClass('hidden');
+    hideErrors();
   });
 
   $(".linkToLogin").click(function(){
@@ -30,6 +31,7 @@ $(function(){
     $('.registerForm').addClass('hidden');
     $(this).addClass('hidden');
     $('.linkToRegister').removeClass('hidden');
+    hideErrors();
   });
 
   // Create default map
@@ -500,10 +502,12 @@ function showEditForm(){
 }
 
  function displayErrors(data){
+  console.log(data);
   console.log("errors are displaying");
   console.log('.alert'); 
   $('.alert').removeClass("hidden");
-  $('.alert').append(data.statusText);
+  $('.alert').empty();
+  $('.alert').append(data.responseJSON.message);
 }
 
 function hideErrors(){
