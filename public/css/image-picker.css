@@ -4,7 +4,8 @@ ul.thumbnails.image_picker_selector {
   list-style-position: outside;
   list-style-type: none;
   padding: 0px;
-  margin: 0px; }
+  margin-left: 17px; 
+  margin-bottom: 0px;}
   ul.thumbnails.image_picker_selector ul {
     overflow: auto;
     list-style-image: none;
@@ -18,8 +19,9 @@ ul.thumbnails.image_picker_selector {
     margin: 0px 12px 12px 0px;
     float: left; }
     ul.thumbnails.image_picker_selector li .thumbnail {
-      padding: 6px;
+      padding: 5px;
       border: 1px solid #dddddd;
+      background-color: white;
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none; }

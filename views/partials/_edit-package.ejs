@@ -1,8 +1,6 @@
-<div>
+ <form class="editPackageForm hidden" action="/packages/edit" method="post">
 
-  <form class="editPackageForm hidden" action="/packages/edit" method="post">
-
-
+    <label for="categriesOfFood">Food categories</label>
     <select multiple="multiple" name="webmenu" id="webmenu1" class="image-picker show-html editPackageContent">
       <option data-img-src="/food-icons/png/fruit-1.png" value="fruit and veg">Fruit and Veg</option>
       <option data-img-src="/food-icons/png/food-1.png" value="meat and fish">Meat and Fish</option>
@@ -26,8 +24,7 @@
 
   <input type="hidden" class="editPackageId" name="name" placeholder="Package ID">
 
-  </form>
+</form>
 
-  <button type="button" class="deletePackageButton hidden">Archive Package</button>
+<button type="button" class="deletePackageButton hidden">Archive Package</button>
 
-</div>
