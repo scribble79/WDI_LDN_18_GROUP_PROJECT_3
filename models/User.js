@@ -2,12 +2,12 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 
 var userSchema = mongoose.Schema({
-  username: { type: String, unique: true, required: true },
+  username: { type: String, unique: true, required: "A username is required" },
   avatar: String,
   lat: Number,
   lng: Number,
   packages: [{type: mongoose.Schema.ObjectId, ref: 'Package'}],
-  email:    { type: String, unique: true, required: true },
+  email:    { type: String, unique: true, required: "An email address is required" },
   passwordHash: { type: String, required: true }
 });
 
