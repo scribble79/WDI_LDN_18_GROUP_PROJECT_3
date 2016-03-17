@@ -1,2 +1,61 @@
-html,body{height:100%;margin:0;padding:0}.mediaIconsDiv{position:absolute;height:100px;top:0;right:15px;z-index:1}.socialIcon{width:35px;margin:5px;margin-top:15px;transition:all 1s ease-out}.socialIcon:hover{transform:rotate(360deg);cursor:pointer}.hidden{display:none}#map{height:100%}select{display:block;width:100%;height:50px}textarea{width:100%;margin:0px}.formContainer{padding:10px 20px;position:absolute;top:0;left:10px;z-index:1;margin-top:10px;width:300px;background-color:rgba(255,255,255,0.8);border-radius:10px;text-align:center}.logo{position:relative;display:inline-block;margin-top:10px;width:250px;height:100px;background-color:red}.loginContainer{position:absolute;top:0;left:1vw;z-index:3;margin-left:37vw;width:300px;background:rgba(255,255,255,0.8);border-radius:5px;text-align:center}.loginbutton{width:290px}.logoutbtn{display:inline-block;position:absolute;bottom:20px;right:20px;width:inherit;background:white}input{width:100%;margin:0}.navbarButton{position:relative;display:inline-block;width:100%;margin-top:5px;background-color:white}.backButton{width:50px;padding-right:15px !important;padding-left:12px !important}.backarrow{max-height:25px;max-width:30px;margin-top:6px}#loadingImage{background:url("../food-icons/groceries.jpeg") no-repeat center fixed;background-size:cover;position:absolute;width:100%;height:100vh;z-index:2}button{width:100%;margin:0;background-color:white;margin-top:5px}input{margin-top:5px}.image-picker{display:block}.alert{z-index:3;height:50px;background-color:rgba(255,255,255,0.7);bottom:10px;position:absolute;margin-left:38vw;border-radius:10px;text-align:center;border:1px solid blue;padding:10px;font-size:28px}
-/*# sourceMappingURL=style.css.map */
+/*
+Error: Invalid CSS after "": expected selector, was "<<<<<<< HEAD"
+        on line 87 of public/sass/style.scss
+
+82:   border-radius: 5px;
+83:   text-align: center;
+84:   // border: 1px solid blue;
+85: }
+86: 
+87: <<<<<<< HEAD
+88: .loginbutton {
+89:   width: 290px;
+90: }
+91: 
+92: //  .logoutContainer {
+
+Backtrace:
+public/sass/style.scss:87
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/scss/parser.rb:1179:in `expected'
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/scss/parser.rb:1115:in `expected'
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/scss/parser.rb:1095:in `expr!'
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/scss/static_parser.rb:20:in `parse_selector'
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:425:in `visit_rule'
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/tree/visitors/base.rb:36:in `visit'
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/stack.rb:79:in `block in with_base'
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/stack.rb:115:in `with_frame'
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/stack.rb:79:in `with_base'
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:158:in `visit'
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/tree/visitors/base.rb:52:in `map'
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:167:in `block in visit_children'
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:166:in `visit_children'
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/tree/visitors/base.rb:36:in `block in visit'
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:186:in `visit_root'
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/tree/visitors/base.rb:36:in `visit'
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:157:in `visit'
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/tree/visitors/perform.rb:8:in `visit'
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/tree/root_node.rb:36:in `css_tree'
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/engine.rb:378:in `_render_with_sourcemap'
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/engine.rb:295:in `render_with_sourcemap'
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/plugin/compiler.rb:490:in `update_stylesheet'
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/plugin/compiler.rb:209:in `each'
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/plugin/compiler.rb:471:in `on_file_changed'
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/lib/sass/plugin/compiler.rb:328:in `block in watch'
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/vendor/listen/lib/listen/listener.rb:252:in `call'
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/vendor/listen/lib/listen/listener.rb:252:in `on_change'
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/vendor/listen/lib/listen/listener.rb:290:in `block in initialize_adapter'
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/vendor/listen/lib/listen/adapters/polling.rb:48:in `call'
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/vendor/listen/lib/listen/adapters/polling.rb:48:in `poll_changed_directories'
+/Users/lise/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/sass-3.4.21/vendor/listen/lib/listen/adapter.rb:299:in `block in start_poller'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Invalid CSS after \"\": expected selector, was \"<<<<<<< HEAD\"\A         on line 87 of public/sass/style.scss\A \A 82:   border-radius: 5px;\A 83:   text-align: center;\A 84:   // border: 1px solid blue;\A 85: }\A 86: \A 87: <<<<<<< HEAD\A 88: .loginbutton {\A 89:   width: 290px;\A 90: }\A 91: \A 92: //  .logoutContainer {"; }
