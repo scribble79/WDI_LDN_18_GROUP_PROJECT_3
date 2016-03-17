@@ -460,8 +460,7 @@ function ajaxRequest(method, url, data, callback) {
       }
     })
     .done(callback)
-    .fail(function(){
-    });
+    .fail(displayErrors);
   }
 
 function removeToken() {
