@@ -1,0 +1,51 @@
+button {
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+.socialIcon {
+  width: 35px;
+  margin: 5px;
+  margin-top: 15px;
+  transition:all 1s ease-out;
+  opacity: 0.6;
+}
+
+.socialIcon:hover {
+  transform: rotate(360deg);
+  cursor: pointer;
+  opacity: 1;
+}
+
+
+.navbarButton {
+  width: 100%;
+  margin-top: 5px;
+  // height: calc(25% - 5px);
+}
+
+.back {
+  color: green !important;
+}
+
+.packageEditButton {
+  margin-top: 8px;
+}
+
+.deletePackageButton {
+  width: calc(100% - 20px);
+  margin-left: 0px !important;
+  margin-bottom: 8px !important;
+}
+
+
+.logoutbtn {
+  display: inline-block;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: inherit;
+  background: white;
+  opacity: 0.8;
+}

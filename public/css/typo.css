@@ -1,0 +1,25 @@
+@font-face {
+    font-family: 'another shabby';
+    src: url('/fonts/anothershabby.ttf');
+    font-weight:400;
+}
+
+h1 {
+  z-index: 3;
+  font-family: 'another shabby';
+  font-size: 100px;
+  text-align: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid grey;
+  margin: 0 !important;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+p {
+  z-index: 3;
+  text-align: center;
+  font-size: 15px;
+  font-family: inherit !important;
+  padding: 15px;
+}

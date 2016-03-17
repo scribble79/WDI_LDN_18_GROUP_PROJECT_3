@@ -1,0 +1,11 @@
+.alert{
+  z-index: 3;
+  background-color: #a9d9ec;
+  opacity: 0.8;
+  bottom: 250px;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  font-size: 15px;
+}
