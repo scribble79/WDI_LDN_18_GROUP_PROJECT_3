@@ -9,7 +9,7 @@ function register(req, res) {
       console.log(err);
       if(err.code && (err.code === 11000 || err.code === 11001)) {
         var attribute = err.message.match(/\$?([a-z]+)_[0-9]/)[1];
-        err = "Validation Error: An account with this " + attribute + " already exists";
+        err = "An account with this " + attribute + " already exists";
       } else  {
         err = err.toString();
       }
