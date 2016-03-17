@@ -662,8 +662,8 @@ function loggedInState(){
   $('.formContainer').show();
   $('.menuContainer').show();
   hideErrors();
-  $('#loadingImage').fadeOut(3000);
-  $('#splash-logo').fadeOut(3000);
+  $('#loadingImage').hide();
+  $('#splash-logo').hide();
   console.log($("#webmenu").imagepicker());
   $('.logoutbtn').show();
   $('.user-packages').hide();
@@ -698,6 +698,7 @@ function loggedOutState(){
   $('.logoutbtn').hide();
   $('.linkToRegister').removeClass('hidden');
   $('#loadingImage').fadeIn(1500);
+  $('#splash-logo').fadeIn(1500);
 }
 
 function authenticationSuccessful(data) {
