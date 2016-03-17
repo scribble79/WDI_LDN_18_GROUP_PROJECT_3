@@ -384,6 +384,7 @@ function loggedInState(){
   $('.menuContainer').show();
   hideErrors();
   $('#loadingImage').fadeOut(3000);
+  $('#splash-logo').fadeOut(3000);
   console.log($("#webmenu").imagepicker());
   $('.logoutbtn').show();
   $('.user-packages').hide();
