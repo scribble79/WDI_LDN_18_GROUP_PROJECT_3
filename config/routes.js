@@ -37,10 +37,10 @@ router.route('/login')
 
 
 router.route('/addLocation')
-  .patch(authenticationController.addLocation);
+  .patch(userController.addLocation);
 
 router.route('/users')
-  .get(authenticationController.usersIndex);
+  .get(userController.usersIndex);
 
 router.route('/users/:id')
   .get(userController.show)

@@ -43,8 +43,8 @@ $(function(){
   // Set initial state of menu
   initialMenuState();
 
-  $('#loadingImage').fadeOut(3000);
-  console.log($("#webmenu").imagepicker());
+  // $('#loadingImage').fadeOut(3000);
+  // console.log($("#webmenu").imagepicker());
 
 });
 
@@ -316,9 +316,11 @@ function loggedInState(){
   $('.userEditForm').hide();
   $('.formContainer').show();
   $('.menuContainer').show();
+  hideErrors();
   // Test edit form population functionality
   populateEditForm();
-
+   $('#loadingImage').fadeOut(3000);
+  console.log($("#webmenu").imagepicker());
 
   // Make request for markers from DB
   ajaxRequest("get", "/api/packages", null, createMarkers);
@@ -345,6 +347,7 @@ function loggedOutState(){
   $('.formContainer').hide();
   $('.logoutbtn').hide();
   $('.linkToRegister').removeClass('hidden');
+  $('#loadingImage').fadeIn(1500);
 }
 
 function authenticationSuccessful(data) {
@@ -358,6 +361,7 @@ function authenticationSuccessful(data) {
     $('.userLocationForm').removeClass('hidden');
     $('.linkToLogin').addClass('hidden');
     $('.linkToRegister').addClass('hidden');
+    hideErrors();
   }
 
 
