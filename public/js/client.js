@@ -826,12 +826,23 @@ function populatePackageEditForm(packageId){
   ajaxRequest(method, url, null, function(data) {
     var package = data.package;
     console.log("PACKAGE: "+ package.note)
-    console.log("POPULATE PACKAGE EDIT DATA: ", package.contact);
+    console.log("POPULATE PACKAGE EDIT DATA: ", package.collection_time);
+
     $('.editPackageNote').empty();
     $('.editPackageNote').html(package.note);
-    $('.editPackageContent').val(package.contents);
+
     $('.editPackageContact').val(package.contact);
     $('.editPackageId').val(package._id);
+
+    // Pre-select preferred time option
+    $('.editPreferredTime').find('option[value=' + package.collection_time +']').attr('selected','selected');
+
+    // Loop through package contents and pre select icons
+    // package.contents.forEach(function(item){
+    //   $('.image_picker_selector').find('option[value="'+ item +'"]').attr('selected', 'selected');
+    //   console.log(typeof item);
+    // });
+
   });
 }
 
