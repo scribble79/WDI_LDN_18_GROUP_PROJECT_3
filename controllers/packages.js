@@ -40,9 +40,12 @@ function packagesUpdate(req, res) {
 }
 
 function packagesDelete(req, res) {
-  Package.findByIdAndRemove(req.params.id, function(err) {
+  Package.findById(req.params.id, function(err, package) {
     if(err) return res.status(500).json({ message: err });
-    return res.status(204).send();
+    package.remove(function(err, package) {
+      if(err) return res.status(500).json({ message: err });
+      return res.status(204).send();
+    });
   });
 }
 
