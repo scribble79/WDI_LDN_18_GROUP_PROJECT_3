@@ -101,9 +101,9 @@ describe('GET /packages/:id', function(){
 });
 
 
-describe('PUT /packages/:id', function(){
+describe('PATCH /packages/:id', function(){
   it('should return a new package with an updated package object', function(done){
-    api.put('/api/packages/' + packageId)
+    api.patch('/api/packages/' + packageId)
         .set('Accept', 'application/json')
         .set('Authorization', 'Bearer ' + token)
         .send({

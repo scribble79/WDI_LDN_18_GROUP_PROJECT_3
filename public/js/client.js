@@ -273,25 +273,36 @@ function submitPackageForm(){
       var lat = results[0].geometry.location.lat();
       var lng = results[0].geometry.location.lng();
       console.log($form.find('select.image-picker').val());
-      var package = {
-      user: user,
-      contents: $form.find('select.image-picker').val(),
-      note: $('.packageNote').val(),
-      contact: $('.packageContact').val(),
-      lat: lat,
-      lng: lng
+
+      var data = { "package": {
+        user: user,
+        contents: $form.find('select.image-picker').val(),
+        note: $('.packageNote').val(),
+        contact: $('.packageContact').val(),
+        lat: lat,
+        lng: lng
+        } 
       }
 
-      var position = { lat: package.lat, lng: package.lng }
+      // var package = {
+      // user: user,
+      // contents: $form.find('select.image-picker').val(),
+      // note: $('.packageNote').val(),
+      // contact: $('.packageContact').val(),
+      // lat: lat,
+      // lng: lng
+      // }
+
+      var position = { lat: data.package.lat, lng: data.package.lng }
 
       map.panTo(position);
       map.setZoom(15);
 
-      console.log("SUBMITTED NEW PACKAGE DATA: ", package);
-      console.log("New package lat and lng: " + package.lat + ", " + package.lng);
+      console.log("SUBMITTED NEW PACKAGE DATA: ", data);
+      console.log("New package lat and lng: " + data.package.lat + ", " + data.package.lng);
 
       // Make request to API to add package and create new pin as callback
-      ajaxRequest("post", url, package, createMarker);
+      ajaxRequest("post", url, data, createMarker);
 
       $form[0].reset();
       loggedInState();
@@ -477,17 +488,20 @@ function updatePackage(){
   var user = currentUser();
   var packageId = $('.editPackageId').val();
 
-  var package = {
-    user: user,
-    contents: $('.editPackageContent').val(),
-    note: $('.editPackageNote').val(),
-    contact: $('.packageContact').val()
-  }
+  var data = 
+    {
+      package: {
+      user: user,
+      contents: $('.editPackageContent').val(),
+      note: $('.editPackageNote').val(),
+      contact: $('.packageContact').val()
+      }
+    }
 
   var method = "patch";
   var url = "/api/packages/" + packageId;
 
-  ajaxRequest(method, url, package, function(){
+  ajaxRequest(method, url, data, function(){
     ajaxRequest("get", "/api/packages", null, createMarkers);
   });
 
