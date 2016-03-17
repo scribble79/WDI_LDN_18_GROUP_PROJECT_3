@@ -116,16 +116,29 @@ function createMarkers(packages){
 
     var infoWindow = new google.maps.InfoWindow({
       position: position,
-        content: '<div class="info-window">' + "<div class='infoWindowTopBar'>" + logos + "</div><br>"+ package.collection_time + '<br>' + package.note + '</br>' +
-        '<br>' + package.contact + '</br></div>'
+        content: '<div class="infoWindow">' + "<div class='infoWindowTopBar'>" + logos + "</div><br><strong>Collection Time:   </strong>"+ package.collection_time + '<br><strong>Notes:   </strong>' + package.note + '</br>' +
+        '<br><strong>Contact Details:   </strong>' + package.contact + '</br></div>'
     });
 
-      marker.addListener('click', function() {
-        if(currentInfoWindow) currentInfoWindow.close();
-          currentInfoWindow = infoWindow;
-          infoWindow.open(map, marker);
-        });
+    marker.addListener('click', function() {
+      if(currentInfoWindow) currentInfoWindow.close();
+        currentInfoWindow = infoWindow;
+        infoWindow.open(map, marker);
+        // Log infowindow containers
+        removeInfoWindowBg();
+      });
     });
+}
+
+function removeInfoWindowBg(){
+  var $iwOuter = $('.gm-style-iw');
+
+  console.log($iwOuter);
+  console.log($iwOuter.length);
+
+  $iwOuter.prev().children(':nth-child(2n)').hide();
+
+
 }
 
 function createMarker(package){
