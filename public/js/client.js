@@ -884,6 +884,7 @@ function showEditForm(){
   $('.alert').removeClass("hidden");
   $('.alert').empty();
   $('.alert').append(data.responseJSON.message);
+
 }
 
 function hideErrors(){
@@ -892,4 +893,5 @@ function hideErrors(){
   $('.alert').addClass("hidden");
   // empty removes all of the html.
   $('.alert').empty();
+  // $('.alert').slideDown(1500);
 }
