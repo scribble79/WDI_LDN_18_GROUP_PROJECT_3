@@ -519,6 +519,7 @@ function addEventListenersToPackages(){
 }
 
 function populatePackageEditForm(packageId){
+  $('.editPackageNote').empty();
 
   var method = 'GET';
   var url = "/api/packages/" + packageId;
@@ -526,7 +527,7 @@ function populatePackageEditForm(packageId){
   ajaxRequest(method, url, null, function(data) {
     var package = data.package;
     console.log("POPULATE PACKAGE EDIT DATA: ", package.contact);
-    $('.editPackageNote').empty();
+    $('.editPackageNote').html('');
     $('.editPackageNote').html(package.note);
     $('.editPackageContent').val(package.contents);
     $('.editPackageContact').val(package.contact);
