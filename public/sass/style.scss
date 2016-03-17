@@ -110,19 +110,62 @@ option:hover {
 .packageContact, .newPackagePostcode {
   margin-bottom: 12px;
 }
+
 .loginContainer {
   position: absolute;
   top: 0;
-  left: 1vw;
   z-index: 3;
-  /*margin-top: 37vh;*/
-  margin-left: 37vw;
-  width: 300px;
-  /*height: 200px;*/
-  background: white;
-  border-radius: 10px;
+  // margin-left: 37vw;
+  // width: 300px;
+  width: 100vw;
   text-align: center;
-  border: 1px solid blue;
+  background: rgba(255,255,255,0.8);
+  text-align: center;
+}
+
+.loginForm {
+  width: 300px;
+  margin: 0 auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.loginForm > input {
+  margin-bottom: 8px;
+}
+
+.loginForm > button {
+  background-color: rgba(255,255,255,0.8);
+}
+
+.registerForm {
+  width: 300px;
+  margin: 0 auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.registerForm > input {
+  margin-bottom: 8px;
+}
+
+.registerForm > button {
+  background-color: rgba(255,255,255,0.8);
+}
+
+.userLocationForm {
+  width: 300px;
+  margin: 0 auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.userLocationForm > input {
+  margin-bottom: 8px;
+}
+
+.userLocationForm > button {
+  background-color: rgba(255,255,255,0.8);
 }
 
 .logoutbtn {
@@ -157,7 +200,7 @@ input {
 
 
 #loadingImage{
-  background: url('../food-icons/groceries.jpeg') no-repeat center fixed;
+  background: url('../background/food-salad-healthy-vegetables.jpg') no-repeat center fixed;
   background-size: cover;
   position: absolute;
   width: 100%;
@@ -213,25 +256,21 @@ h1 {
 p {
   z-index: 3;
   text-align: center;
-  font-size: 18px;
+  font-size: 15px;
+  font-family: inherit !important;
+  padding: 15px;
 }
 
 #splash-logo {  
   left: 0vw;
-  // display: inline-block;
-  margin-left: 25vw;
   z-index: 3;
-  background-color: rgba(255, 255, 255, 0.7);
-  top: 30vh;
+  background-color: rgba(255, 255, 255, 0.8);
+  bottom: 0;
   position: absolute;
-  border-radius: 10px;
   text-align: center;
-  border: 1px solid blue;
-  padding: 15px;
-  max-width: 30vw;
-  margin: 0 35vw;
-  height: auto;
-  // margin-left: 580px;
+  // padding: 15px;
+  width: 100vw !important;
+  margin: 0;
 }
 
 .image_picker_selector {
