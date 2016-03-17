@@ -52,11 +52,13 @@ html, body {
   margin: 5px;
   margin-top: 15px;
   transition:all 1s ease-out;
+  opacity: 0.6;
 }
 
 .socialIcon:hover {
   transform: rotate(360deg);
   cursor: pointer;
+  opacity: 1;
 }
 
 .hidden {
