@@ -26,6 +26,7 @@ $(function(){
     $('.registerForm').removeClass('hidden');
     $(this).addClass('hidden');
     $('.linkToLogin').removeClass('hidden');
+    hideErrors();
   });
 
   $(".linkToLogin").click(function(){
@@ -33,6 +34,7 @@ $(function(){
     $('.registerForm').addClass('hidden');
     $(this).addClass('hidden');
     $('.linkToRegister').removeClass('hidden');
+    hideErrors();
   });
 
   // Create default map
@@ -45,6 +47,7 @@ $(function(){
   initialMenuState();
 
   console.log($("#webmenu").imagepicker());
+
 
 });
 
@@ -187,6 +190,7 @@ function createMarker(package){
 
   var infoWindow = new google.maps.InfoWindow({
     position: position,
+
       content: '<div class="info-window">' + logos + '<br>' + package.note + '</br>' +
       '<br>' + package.contact + '</br></div>'
   });
@@ -393,6 +397,9 @@ function loggedInState(){
   $('.userEditForm').hide();
   $('.formContainer').show();
   $('.menuContainer').show();
+  hideErrors();
+  $('#loadingImage').fadeOut(3000);
+  console.log($("#webmenu").imagepicker());
   $('.logoutbtn').show();
   $('.user-packages').hide();
   $('.editPackageForm').hide();
@@ -425,6 +432,7 @@ function loggedOutState(){
   $('.formContainer').hide();
   $('.logoutbtn').hide();
   $('.linkToRegister').removeClass('hidden');
+  $('#loadingImage').fadeIn(1500);
 }
 
 function authenticationSuccessful(data) {
@@ -438,6 +446,7 @@ function authenticationSuccessful(data) {
     $('.userLocationForm').removeClass('hidden');
     $('.linkToLogin').addClass('hidden');
     $('.linkToRegister').addClass('hidden');
+    hideErrors();
   }
 
 
@@ -455,6 +464,7 @@ function getToken() {
 
 function ajaxRequest(method, url, data, callback) {
     // create a re-useable ajaxRequest function
+
     return $.ajax({
       method: method,
       url: url,
@@ -465,8 +475,7 @@ function ajaxRequest(method, url, data, callback) {
       }
     })
     .done(callback)
-    .fail(function(){
-    });
+    .fail(displayErrors);
   }
 
 function removeToken() {
@@ -597,4 +606,21 @@ function showEditForm(){
   $('.menuContainer').hide();
   $('.userEditForm').show();
   $('.navbarButton').show();
+}
+
+ function displayErrors(data){
+  console.log(data);
+  console.log("errors are displaying");
+  console.log('.alert'); 
+  $('.alert').removeClass("hidden");
+  $('.alert').empty();
+  $('.alert').append(data.responseJSON.message);
+}
+
+function hideErrors(){
+  console.log("errors are hidden");
+  // remove the errors from the alert and hide it
+  $('.alert').addClass("hidden");
+  // empty removes all of the html. 
+  $('.alert').empty();
 }
