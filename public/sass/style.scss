@@ -223,16 +223,17 @@ button {
 
 .alert{
   z-index: 3;
-  height: 50px;
-  background-color: rgba(255, 255, 255, 0.7);
-  bottom: 0;
+  // height: 50px;
+  background-color: #a9d9ec;
+  opacity: 0.8;
+  bottom: 27vh;
   position: absolute;
   width: 100%;
-  border-radius: 10px;
+  // border-radius: 10px;
   text-align: center;
-  border: 1px solid blue;
+  // border: 1px solid blue;
   padding: 10px;
-  font-size: 28px;
+  font-size: 15px;
 }
 
 @font-face {
