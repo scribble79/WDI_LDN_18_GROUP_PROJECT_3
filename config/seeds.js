@@ -2,7 +2,8 @@ var mongoose = require('mongoose');
 var User = require('../models/User');
 var Package = require('../models/Package');
 
-mongoose.connect('mongodb://localhost/excess');
+var databaseURL = process.env.MONGOLAB_URI || 'mongodb://localhost/excess';
+mongoose.connect(databaseURL);
 
 // Kill original db
 User.collection.drop();
