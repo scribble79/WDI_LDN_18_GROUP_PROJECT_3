@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
-var User = require('../models/user');
-var Package = require('../models/package');
+var User = require('../models/User');
+var Package = require('../models/Package');
 
 mongoose.connect('mongodb://localhost/excess');
 
